@@ -1,10 +1,10 @@
-import json
-import webbrowser
+import ctypes
 import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QPushButton, QVBoxLayout, QStackedWidget, QLabel
 )
+from PyQt6.QtGui import QIcon
 
 from ServerManager.servermanagerhome import ServerManagerHome
 from IncidentManager.incidentmanagerhome import IncidentManagerHome
@@ -58,7 +58,7 @@ class MainWindow(QWidget):
         page = QWidget()
         layout = QVBoxLayout()
 
-        label = QLabel("Fuck you!")
+        label = QLabel("Main")
 
         button1 = QPushButton("Server Manager")
         button1.clicked.connect(self.btn_server_manager_click)
@@ -111,7 +111,13 @@ class MainWindow(QWidget):
         
 
 if __name__ == "__main__":
+    if sys.platform == "win32":
+        myappid = "yourcompany.marshal.app.1"  # arbitrary but unique string
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+        
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("marshal.ico"))
     window = MainWindow()
+    window.setWindowIcon(QIcon("marshal.ico"))
     window.show()
     sys.exit(app.exec())

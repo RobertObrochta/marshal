@@ -1,5 +1,6 @@
 from http.server import HTTPServer
 import json
+from pathlib import Path
 import webbrowser
 import sys
 from PyQt6.QtCore import Qt
@@ -19,13 +20,12 @@ import hashlib
 import secrets
 
 
-BACKEND_URL = "https://config.yourdomain.com"
+BACKEND_URL = "https://marshal-app.com"
 WIN_BACKEND_URL = "http://localhost:8000"
-BACKEND_URL = WIN_BACKEND_URL
+#BACKEND_URL = WIN_BACKEND_URL
 
 CLIENT_ID = "1533151819977592882"
 REDIRECT_URI = "http://localhost:8000/callback"
-ADMIN_FILE = "C:\\Users\\robobrochta\\Documents\\ORLstuff\\marshalConfig\\admins.json" # TODO this will have a workflow to it from GIST
 
 auth_result = {}
 
@@ -54,7 +54,7 @@ def fetch_admin_list():
     return resp.json()
 
 
-def load_admin_data(path=ADMIN_FILE):
+def load_admin_data():
     try:
         data = fetch_admin_list()
     except requests.RequestException:

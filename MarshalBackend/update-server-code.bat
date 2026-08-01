@@ -1,0 +1,1 @@
+scp server.py debian@10.0.0.165:~/marshal/server.py

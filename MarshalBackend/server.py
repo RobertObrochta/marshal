@@ -10,8 +10,8 @@ WIN_ADMIN_PATH = os.path.expandvars(r"C:\Users\robobrochta\Documents\ORLstuff\ma
 
 # uncomment below for local testing
 # comment back prior to shipping
-CONFIG_PATH = WIN_CONFIG_PATH
-ADMIN_PATH = WIN_ADMIN_PATH
+#CONFIG_PATH = WIN_CONFIG_PATH
+#ADMIN_PATH = WIN_ADMIN_PATH
 
 def load_json(path):
     with open(path) as f:

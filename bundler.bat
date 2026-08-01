@@ -1,0 +1,1 @@
+python -m  PyInstaller --onefile C:\Users\robobrochta\workspace\marshal\main.py

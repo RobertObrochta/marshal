@@ -17,7 +17,7 @@ import requests
 if TYPE_CHECKING:
     from main import MainWindow
 
-BACKEND_URL = "https://config.yourdomain.com"
+BACKEND_URL = "https://marshal-app.com"
 WIN_BACKEND_URL = "http://localhost:8000"
 #BACKEND_URL = WIN_BACKEND_URL
 
