@@ -1,1 +1,1 @@
-python -m  PyInstaller --onefile C:\Users\robobrochta\workspace\marshal\main.py
+python -m  PyInstaller --onefile --windowed --icon=marshal.ico --name=Marshal C:\Users\robobrochta\workspace\marshal\main.py
