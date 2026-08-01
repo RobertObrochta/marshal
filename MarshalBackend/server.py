@@ -3,7 +3,7 @@ import requests
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import os
 
-CONFIG_PATH = "/home/debian/marshal/config.json"
+CONFIG_PATH = "/home/debian/marshal/acctv.conf"
 ADMIN_PATH = "/home/debian/marshal/admins.json"
 WIN_CONFIG_PATH = os.path.expandvars(r"%localappdata%\ACC_TV\acctv.conf")
 WIN_ADMIN_PATH = os.path.expandvars(r"C:\Users\robobrochta\Documents\ORLstuff\marshalConfig\admins.json")

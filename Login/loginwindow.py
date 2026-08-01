@@ -107,18 +107,6 @@ def login_with_discord():
     server.handle_request()  # blocks until the callback comes in
     return auth_result
 
-def check_admin_login():
-    admin_ids, admin_usernames = load_admin_data()
-    result = login_with_discord()
-
-    if not result:
-        print("Login failed or was cancelled.")
-        return False
-
-    is_admin = result["user_id"] in admin_ids or result["username"].lower() in admin_usernames
-    print(f"Logged in as {result['username']} ({result['user_id']}) — admin: {is_admin}")
-    return is_admin
-
 
 class CallbackHandler(BaseHTTPRequestHandler):
     code_verifier = None  # set externally before the server handles a request
@@ -135,6 +123,7 @@ class CallbackHandler(BaseHTTPRequestHandler):
         if code:
             access_token = exchange_code_for_token(code, CallbackHandler.code_verifier)
             user = get_discord_user(access_token)
+            auth_result["access_token"] = access_token
             auth_result["user_id"] = user["id"]
             auth_result["username"] = user["username"]
 
@@ -188,9 +177,23 @@ class LoginWindow(QWidget):
         
         return page
     
+    def check_admin_login(self):
+        admin_ids, admin_usernames = load_admin_data()
+        result = login_with_discord()
+
+        if not result:
+            print("Login failed or was cancelled.")
+            return False
+
+        self.ParentWindow.DiscordAccessToken = result["access_token"]
+        is_admin = result["user_id"] in admin_ids or result["username"].lower() in admin_usernames
+        print(f"Logged in as {result['username']} ({result['user_id']}) — admin: {is_admin}")
+        print(f"updated global DiscordAccessToken: {self.ParentWindow.DiscordAccessToken}")
+        return is_admin
+    
     def btn_login(self):
         # login and see if the user is admin at the same time
-        self.ParentWindow.IsAdmin = check_admin_login()
+        self.ParentWindow.IsAdmin = self.check_admin_login()
         
         # any window that depends on IsAdmin should be notified down here
         self.ParentWindow.IncidentManager.admin_status_changed()

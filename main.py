@@ -12,6 +12,7 @@ from Login.loginwindow import LoginWindow
 
 class MainWindow(QWidget):
     IsAdmin = False
+    DiscordAccessToken = None
     
     # all Pages
     Login = None
@@ -101,7 +102,8 @@ class MainWindow(QWidget):
         
     def btn_login_click(self):
         self.print_breadcrumb("Login")
-        self.stack.setCurrentIndex(3)
+        self.Login.btn_login()
+        #self.stack.setCurrentIndex(3)
 
     def return_to_main_menu(self):
         self.print_breadcrumb("Main Menu")
