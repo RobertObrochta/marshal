@@ -1,5 +1,9 @@
 import json
 import os
+import platform
+import subprocess
+import pygetwindow as gw
+from pywinauto import Application
 from pathlib import Path
 import webbrowser
 import sys
@@ -15,7 +19,7 @@ if TYPE_CHECKING:
 
 BACKEND_URL = "https://config.yourdomain.com"
 WIN_BACKEND_URL = "http://localhost:8000"
-BACKEND_URL = WIN_BACKEND_URL
+#BACKEND_URL = WIN_BACKEND_URL
 
 ACCTV_CONFIG_PATH_FOLDER = os.path.expandvars(r"%localappdata%\ACC_TV")
 TEST_ACCTV_CONFIG_PATH_FOLDER = os.path.expandvars(r"%USERPROFILE%\Documents\ACC_TV")
@@ -32,6 +36,7 @@ def download_config() -> Path:
     save_path.mkdir(parents=True, exist_ok=True)
 
     file_path = save_path / ACCTV_CONFIG_PATH_FILE_NAME
+    print(f"writing new config to {file_path}")
     with open(file_path, "wb") as f:
         f.write(resp.content)
 
@@ -43,7 +48,7 @@ def upload_config(discord_access_token: str) -> dict:
     Reads a local JSON file and uploads it to overwrite the server's config.
     Returns the backend's response (or raises on failure).
     """
-    path = Path(f"{ACCTV_CONFIG_PATH_FOLDER}\{ACCTV_CONFIG_PATH_FILE_NAME}")
+    path = Path(f"{ACCTV_CONFIG_PATH_FOLDER}\\{ACCTV_CONFIG_PATH_FILE_NAME}")
     with open(path) as f:
         local_data = json.load(f)  # validates it's actually valid JSON before sending
 
@@ -55,6 +60,56 @@ def upload_config(discord_access_token: str) -> dict:
     resp.raise_for_status()
     return resp.json()
 
+def launch_or_focus_exe():
+    window_title = "ACCTV"
+    exe_name = "ACCTV.exe"
+    
+    if platform.system() != "Windows":
+        print("Not on a Windows PC.")
+        return
+    
+    could_focus = focus_exe(window_title)
+    if not could_focus:
+        launch_exe(exe_name)
+        
+def focus_exe(window_title):
+    # 1. Check if the window is already open by its title
+    windows = gw.getWindowsWithTitle(window_title)
+    
+    if windows:
+        print(f"Found open window matching '{window_title}'. Bringing to foreground...")
+        try:
+            # 2. Connect to the existing window and force it to focus
+            # This handles windows that are minimized or hidden behind other apps
+            app = Application().connect(title_re=f".*{window_title}.*")
+            app.window(title_re=f".*{window_title}.*").set_focus()
+            return True
+        except Exception as e:
+            print(f"Could not focus window: {e}. Trying to launch instead...")
+            return False
+
+def launch_exe(filename):
+    print(f"Searching for {filename}...")
+    
+    # first check the default location
+    for root, dirs, files in os.walk(os.path.expandvars(r"%USERPROFILE%")):
+        if filename in files:
+            full_path = os.path.join(root, filename)
+            print(f"Found! Launching: {full_path}")
+            subprocess.Popen([full_path])
+            return 
+    
+    # if not found, go into the very root of the PC and attempt to find from there
+    for root, dirs, files in os.walk("C:\\"):
+        if filename in files:
+            full_path = os.path.join(root, filename)
+            print(f"Found! Launching: {full_path}")
+            subprocess.Popen([full_path])
+            return 
+        
+    print(f"Could not find {filename} on the system.")
+        
+        
 class IncidentManagerHome(QWidget):    
     
     ParentWindow = None
@@ -92,11 +147,14 @@ class IncidentManagerHome(QWidget):
         button1 = QPushButton("Main Menu")
         button1.clicked.connect(self.return_to_main_menu)
         
-        button2 = QPushButton("Download Incident Manager")
+        button2 = QPushButton("Download ACC TV")
         button2.clicked.connect(self.btn_download_incident_manager)
         
         button3 = QPushButton("Configure Incident Manager")
         button3.clicked.connect(self.btn_configure_incident_manager)
+        
+        button4 = QPushButton("Launch ACC TV")
+        button4.clicked.connect(self.btn_launch_acc_tv)
         
         # dynamic button population for that allows the user to upload to some shared thing
         self.admin_status_changed()
@@ -105,6 +163,7 @@ class IncidentManagerHome(QWidget):
         layout.addWidget(button1)
         layout.addWidget(button2)
         layout.addWidget(button3)
+        layout.addWidget(button4)
         
         page.setLayout(layout)
         
@@ -122,7 +181,9 @@ class IncidentManagerHome(QWidget):
         # these people can upload to this centralized place
         
         download_config()
-
+        
+    def btn_launch_acc_tv(self):
+        launch_or_focus_exe()
 
     def btn_upload_incident_manager_config(self):
         if not self.ParentWindow.IsAdmin:

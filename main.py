@@ -63,7 +63,7 @@ class MainWindow(QWidget):
         button1 = QPushButton("Server Manager")
         button1.clicked.connect(self.btn_server_manager_click)
 
-        button2 = QPushButton("Incident Manager")
+        button2 = QPushButton("ACC TV")
         button2.clicked.connect(self.btn_incident_manager_click)
         
         button3 = QPushButton("Login")
@@ -97,7 +97,7 @@ class MainWindow(QWidget):
         self.stack.setCurrentIndex(1)
 
     def btn_incident_manager_click(self):
-        self.print_breadcrumb("Incident Manager - Home")
+        self.print_breadcrumb("ACC TV - Home")
         self.stack.setCurrentIndex(2)
         
     def btn_login_click(self):
