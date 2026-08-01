@@ -4,11 +4,14 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QPushButton, QVBoxLayout, QStackedWidget, QLabel
 )
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from main import MainWindow
 
 class ServerManagerHome(QWidget):    
     
     ParentWindow = None
-    def __init__(self, Parent):
+    def __init__(self, Parent:MainWindow):
         super().__init__()
         self.ParentWindow = Parent
         self.setWindowTitle("Basic PyQt6 Window with Navigation")
@@ -46,7 +49,7 @@ class ServerManagerHome(QWidget):
         button2.clicked.connect(self.btn_upload_entry_list)
         
         button3 = QPushButton("Manage Championships")
-        button3.clicked.connect(self.btn_upload_entry_list)
+        button3.clicked.connect(self.btn_manage_championships)
 
         layout.addWidget(label)
         layout.addWidget(button1)
@@ -65,6 +68,9 @@ class ServerManagerHome(QWidget):
         # new page that will bring back all championships in a dropdown list. you select one, and it will let you
         # 1. download the entry list for that championship
         # 2. it will automatically upload it to entry list
+        # AND/OR 
+        # Points stuff
+        # in general, more championship management stuff here
         
         # but for now it's gonna be dumb, so just redirect to the championships page so that you manually do it
             url = "https://www.thesimgrid.com/communities/odysseyracingleague/championships"

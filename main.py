@@ -1,3 +1,4 @@
+import json
 import webbrowser
 import sys
 from PyQt6.QtCore import Qt
@@ -6,8 +7,17 @@ from PyQt6.QtWidgets import (
 )
 
 from ServerManager.servermanagerhome import ServerManagerHome
+from IncidentManager.incidentmanagerhome import IncidentManagerHome
+from Login.loginwindow import LoginWindow
 
 class MainWindow(QWidget):
+    IsAdmin = False
+    
+    # all Pages
+    Login = None
+    IncidentManager = None
+    ServerManager = None
+    
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Marshal")
@@ -18,31 +28,27 @@ class MainWindow(QWidget):
 
         self.create_pages()
 
-        self.stack.addWidget(self.page1)  # index 0
-        self.stack.addWidget(self.page2)  # index 1
-        self.stack.addWidget(self.page3)  # index 3
+        self.stack.addWidget(self.page1) 
+        self.stack.addWidget(self.page2) 
+        self.stack.addWidget(self.page3)
+        self.stack.addWidget(self.page4)
 
         layout = QVBoxLayout()
         layout.addWidget(self.stack, alignment=Qt.AlignmentFlag.AlignCenter)
         self.setLayout(layout)
         
     def center_on_screen(self):
-        # 1. Get the geometry of the window (including its title bar/borders)
         window_geometry = self.frameGeometry()
-        
-        # 2. Get the center point of the current monitor's available geometry
         screen_center = self.screen().availableGeometry().center()
         
-        # 3. Move the virtual rectangle's center to the screen's center
         window_geometry.moveCenter(screen_center)
-        
-        # 4. Move the actual window's top-left corner to the rectangle's top-left
         self.move(window_geometry.topLeft())
         
     def create_pages(self):
         self.page1 = self.create_main_menu()
         self.page2 = self.create_server_manager_home()
         self.page3 = self.create_incident_manager_home()
+        self.page4 = self.create_login_page()
         
     def print_breadcrumb(self, pageToNav:str):
         print(f"Navigating to: {pageToNav}")
@@ -58,31 +64,32 @@ class MainWindow(QWidget):
 
         button2 = QPushButton("Incident Manager")
         button2.clicked.connect(self.btn_incident_manager_click)
+        
+        button3 = QPushButton("Login")
+        button3.clicked.connect(self.btn_login_click)
 
         layout.addWidget(label)
         layout.addWidget(button1)
         layout.addWidget(button2)
+        layout.addWidget(button3)
         page.setLayout(layout)
         
         return page
 
     def create_server_manager_home(self):
         page = ServerManagerHome(self)
+        self.ServerManager = page
         return page
     
     def create_incident_manager_home(self):
-            page = QWidget()
-            layout = QVBoxLayout()
-    
-            label = QLabel("Incident Manager - Home")
-    
-            back_button = QPushButton("Back to Main Menu")
-            back_button.clicked.connect(self.return_to_main_menu)
-    
-            layout.addWidget(label)
-            layout.addWidget(back_button)
-            page.setLayout(layout)
-            return page
+        page = IncidentManagerHome(self)
+        self.IncidentManager = page
+        return page
+        
+    def create_login_page(self):
+        page = LoginWindow(self)
+        self.Login = page
+        return page
 
     def btn_server_manager_click(self):
         self.print_breadcrumb("Server Manager - Home")
@@ -91,7 +98,10 @@ class MainWindow(QWidget):
     def btn_incident_manager_click(self):
         self.print_breadcrumb("Incident Manager - Home")
         self.stack.setCurrentIndex(2)
-        # TODO spawn an incident manager page here
+        
+    def btn_login_click(self):
+        self.print_breadcrumb("Login")
+        self.stack.setCurrentIndex(3)
 
     def return_to_main_menu(self):
         self.print_breadcrumb("Main Menu")
