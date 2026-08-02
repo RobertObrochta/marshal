@@ -1,12 +1,17 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from PyInstaller.utils.hooks import collect_submodules
+
+block_cipher = None
+
+selenium_hidden_imports = collect_submodules('selenium')
 
 a = Analysis(
-    ['C:\\Users\\robobrochta\\workspace\\marshal\\main.py'],
+    ['main.py'],
     pathex=[],
     binaries=[],
     datas=[],
-    hiddenimports=[],
+    hiddenimports=selenium_hidden_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
