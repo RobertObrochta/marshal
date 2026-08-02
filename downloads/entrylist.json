@@ -3,1575 +3,18 @@
     {
       "drivers": [
         {
-          "firstName": "Sebastian ",
-          "lastName": "Rabes ",
-          "shortName": "RAB",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561197978532865"
-        }
-      ],
-      "raceNumber": 912,
-      "forcedCarModel": 60,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Cryonics  - Rabi",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Logan",
-          "lastName": "Schaeffer",
-          "shortName": "SCH",
-          "nationality": 39,
-          "driverCategory": 0,
-          "playerID": "S76561198117466444"
-        }
-      ],
-      "raceNumber": 288,
-      "forcedCarModel": 27,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Halberd Motorsports - Madhaus | SRA",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Andre",
-          "lastName": "Batista",
-          "shortName": "BAT",
-          "nationality": 36,
-          "driverCategory": 2,
-          "playerID": "S76561198050701167"
-        }
-      ],
-      "raceNumber": 992,
-      "forcedCarModel": 11,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "ABRacing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Robert",
-          "lastName": "Logan",
-          "shortName": "LOG",
-          "nationality": 5,
-          "driverCategory": 0,
-          "playerID": "S76561198110188569"
-        }
-      ],
-      "raceNumber": 83,
-      "forcedCarModel": 27,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "ORL | Dragon Endurance Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Adam ",
-          "lastName": "Noorhalim ",
-          "shortName": "NOO",
-          "nationality": 62,
-          "driverCategory": 2,
-          "playerID": "S76561199386333625"
-        }
-      ],
-      "raceNumber": 574,
-      "forcedCarModel": 83,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "21A Evolution ",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Dark",
-          "lastName": "Skull",
-          "shortName": "SKU",
-          "nationality": 0,
-          "driverCategory": 2,
-          "playerID": "S76561199241844402"
-        }
-      ],
-      "raceNumber": 404,
-      "forcedCarModel": 82,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Wall-E(njoyers) - Pampers",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
           "firstName": "Feri",
           "lastName": "Szcirka",
           "shortName": "SZC",
+          "driverCategory": 0,
           "nationality": 20,
-          "driverCategory": 2,
           "playerID": "S76561198079468695"
         }
       ],
       "raceNumber": 19,
-      "forcedCarModel": 80,
-      "customCar": "",
+      "forcedCarModel": 31,
       "overrideDriverInfo": 1,
       "defaultGridPosition": -1,
-      "teamName": "Penguin Racing Team",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Falk",
-          "lastName": "von Hafen",
-          "shortName": "VON",
-          "nationality": 2,
-          "driverCategory": 2,
-          "playerID": "S76561199467044343"
-        }
-      ],
-      "raceNumber": 3,
-      "forcedCarModel": 82,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Tigerclan Sigma Racing - Tigerclan Racing 2",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Dorus",
-          "lastName": "de Corte",
-          "shortName": "DEC",
-          "nationality": 12,
-          "driverCategory": 1,
-          "playerID": "S76561199447091425"
-        }
-      ],
-      "raceNumber": 34,
-      "forcedCarModel": 9,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Noble - Dorus de Corte",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Daniel",
-          "lastName": "Krahmer",
-          "shortName": "KRA",
-          "nationality": 2,
-          "driverCategory": 2,
-          "playerID": "S76561199569668196"
-        }
-      ],
-      "raceNumber": 460,
-      "forcedCarModel": 12,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "DK Racing Team",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Alessandro",
-          "lastName": "Di Salvo",
-          "shortName": "DIS",
-          "nationality": 1,
-          "driverCategory": 2,
-          "playerID": "S76561198166594693"
-        },
-        {
-          "firstName": "David",
-          "lastName": "Angelo",
-          "shortName": "ANG",
-          "nationality": 9,
-          "driverCategory": 2,
-          "playerID": "S76561199757627823"
-        }
-      ],
-      "raceNumber": 5,
-      "forcedCarModel": 5,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Silverline V1 Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Jake",
-          "lastName": "Deshong ",
-          "shortName": "DES",
-          "nationality": 39,
-          "driverCategory": 1,
-          "playerID": "S76561199503657797"
-        }
-      ],
-      "raceNumber": 2,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Slick 50 Racing  - Jake Deshong ",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Kieran",
-          "lastName": "Schembri",
-          "shortName": "SCH",
-          "nationality": 0,
-          "driverCategory": 0,
-          "playerID": "S76561199480503503"
-        }
-      ],
-      "raceNumber": 11,
-      "forcedCarModel": 27,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Masain - 11",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Gen",
-          "lastName": "Urzo",
-          "shortName": "URZ",
-          "nationality": 1,
-          "driverCategory": 2,
-          "playerID": "S76561198429047079"
-        }
-      ],
-      "raceNumber": 990,
-      "forcedCarModel": 83,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Go Orbit",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "JR ",
-          "lastName": "Chukarescu",
-          "shortName": "CHU",
-          "nationality": 70,
-          "driverCategory": 2,
-          "playerID": "S"
-        }
-      ],
-      "raceNumber": 794,
-      "forcedCarModel": 85,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Camp's R-Team - GT2",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Nico",
-          "lastName": "Veldman",
-          "shortName": "VEL",
-          "nationality": 12,
-          "driverCategory": 0,
-          "playerID": "S76561198074042501"
-        }
-      ],
-      "raceNumber": 29,
-      "forcedCarModel": 60,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "FRL RACING TEAM - NICOOOO",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Bourhan eddine",
-          "lastName": "Gazoph",
-          "shortName": "GAZ",
-          "nationality": 0,
-          "driverCategory": 1,
-          "playerID": "S76561198045646290"
-        }
-      ],
-      "raceNumber": 167,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Gazoo",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Anton",
-          "lastName": "Klimov",
-          "shortName": "KLI",
-          "nationality": 0,
-          "driverCategory": 1,
-          "playerID": "S76561198082716211"
-        }
-      ],
-      "raceNumber": 486,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "PAWS Meowtorspurrt - 486",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Matt",
-          "lastName": "Whitburn",
-          "shortName": "WHI",
-          "nationality": 5,
-          "driverCategory": 2,
-          "playerID": "S76561199147325699"
-        }
-      ],
-      "raceNumber": 620,
-      "forcedCarModel": 84,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Rainbow Sparkles Racing - Rainbow Sparkles Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Rei",
-          "lastName": "Bardhaj",
-          "shortName": "BAR",
-          "nationality": 22,
-          "driverCategory": 2,
-          "playerID": "S76561198098919341"
-        }
-      ],
-      "raceNumber": 559,
-      "forcedCarModel": 11,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Qj Motren Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Savva ",
-          "lastName": "Sergeev",
-          "shortName": "SER",
-          "nationality": 39,
-          "driverCategory": 2,
-          "playerID": "S76561198131180403"
-        }
-      ],
-      "raceNumber": 666,
-      "forcedCarModel": 10,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Tracnichki - EVILL WATER",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Alex",
-          "lastName": "Kuch",
-          "shortName": "KUC",
-          "nationality": 2,
-          "driverCategory": 1,
-          "playerID": "S76561199543025762"
-        }
-      ],
-      "raceNumber": 251,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Scottish Legends - Cup car",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Richard",
-          "lastName": "Harknett",
-          "shortName": "HAR",
-          "nationality": 34,
-          "driverCategory": 2,
-          "playerID": "S76561198135076414"
-        }
-      ],
-      "raceNumber": 66,
-      "forcedCarModel": 17,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Odyssey Racing League - Slow Team",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Anton",
-          "lastName": "Mironov",
-          "shortName": "MIR",
-          "nationality": 0,
-          "driverCategory": 1,
-          "playerID": "S76561198119363667"
-        }
-      ],
-      "raceNumber": 113,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "ABOBA",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Max",
-          "lastName": "Gouveia",
-          "shortName": "GOU",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561199699240764"
-        }
-      ],
-      "raceNumber": 7,
-      "forcedCarModel": 51,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Masain - 007",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Benne",
-          "lastName": "Revering",
-          "shortName": "REV",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561198271832643"
-        },
-        {
-          "firstName": "Felix",
-          "lastName": "Bernhardt",
-          "shortName": "BER",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561198880621080"
-        }
-      ],
-      "raceNumber": 180,
-      "forcedCarModel": 60,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Winkler Motorsport",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Marco ",
-          "lastName": "Henkes ",
-          "shortName": "HEN",
-          "nationality": 7,
-          "driverCategory": 2,
-          "playerID": "S76561198073219230"
-        }
-      ],
-      "raceNumber": 555,
-      "forcedCarModel": 10,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "WHS Racing  - WHS Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Oskar",
-          "lastName": "Kropornicki",
-          "shortName": "KRO",
-          "nationality": 13,
-          "driverCategory": 2,
-          "playerID": "S76561199155235576"
-        }
-      ],
-      "raceNumber": 17,
-      "forcedCarModel": 3,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "NavyBings - NavyBings",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Anvay",
-          "lastName": "Mali",
-          "shortName": "MAL",
-          "nationality": 56,
-          "driverCategory": 2,
-          "playerID": "S76561199190554621"
-        }
-      ],
-      "raceNumber": 143,
-      "forcedCarModel": 3,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "AS Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Matthias",
-          "lastName": "Blobaum",
-          "shortName": "BLO",
-          "nationality": 2,
-          "driverCategory": 2,
-          "playerID": "S76561198037451868"
-        }
-      ],
-      "raceNumber": 123,
-      "forcedCarModel": 14,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "SDD Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Kyle",
-          "lastName": "White",
-          "shortName": "WHI",
-          "nationality": 39,
-          "driverCategory": 0,
-          "playerID": "S76561199126508271"
-        }
-      ],
-      "raceNumber": 56,
-      "forcedCarModel": 55,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Stint Happens - F-Bomb Camaro",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Aidan",
-          "lastName": "Springer",
-          "shortName": "SPR",
-          "nationality": 39,
-          "driverCategory": 2,
-          "playerID": "S76561199448875571"
-        }
-      ],
-      "raceNumber": 44,
-      "forcedCarModel": 83,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Zips Motorsports",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Selena ",
-          "lastName": "Boonstra",
-          "shortName": "BOO",
-          "nationality": 34,
-          "driverCategory": 2,
-          "playerID": "S76561198387947975"
-        }
-      ],
-      "raceNumber": 77,
-      "forcedCarModel": 83,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Falcon Motorsports - Lunar Falcon",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Kasra",
-          "lastName": "Arabi",
-          "shortName": "ARA",
-          "nationality": 78,
-          "driverCategory": 2,
-          "playerID": "S76561199090712459"
-        }
-      ],
-      "raceNumber": 592,
-      "forcedCarModel": 83,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Falcon Motorsports",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Luca",
-          "lastName": "Maggiolo SL",
-          "shortName": "MAG",
-          "nationality": 1,
-          "driverCategory": 1,
-          "playerID": "S76561199049087462"
-        }
-      ],
-      "raceNumber": 40,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Scottish Legends - Cup 2",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Race",
-          "lastName": "Ticket",
-          "shortName": "TIC",
-          "nationality": 56,
-          "driverCategory": 2,
-          "playerID": "S76561198747716117"
-        }
-      ],
-      "raceNumber": 18,
-      "forcedCarModel": 3,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "SRT Racing - RaceTicket",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Christian",
-          "lastName": "McQueen",
-          "shortName": "MCQ",
-          "nationality": 31,
-          "driverCategory": 2,
-          "playerID": "S76561198725739288"
-        }
-      ],
-      "raceNumber": 71,
-      "forcedCarModel": 82,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Balls and Dolls Motorsport (BAD) - KAKASHKE",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Clayton",
-          "lastName": "Filsinger",
-          "shortName": "FIL",
-          "nationality": 34,
-          "driverCategory": 0,
-          "playerID": "S76561198066096763"
-        }
-      ],
-      "raceNumber": 615,
-      "forcedCarModel": 59,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Odyssey Racing League - #615",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Brayan",
-          "lastName": "De Santiago",
-          "shortName": "DES",
-          "nationality": 39,
-          "driverCategory": 0,
-          "playerID": "S76561198343990081"
-        },
-        {
-          "firstName": "Shane",
-          "lastName": "Sullivan",
-          "shortName": "SUL",
-          "nationality": 39,
-          "driverCategory": 0,
-          "playerID": "S76561199092643589"
-        }
-      ],
-      "raceNumber": 617,
-      "forcedCarModel": 53,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "617 Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Max",
-          "lastName": "Pitsunik",
-          "shortName": "PIT",
-          "nationality": 0,
-          "driverCategory": 2,
-          "playerID": "S76561199466446189"
-        },
-        {
-          "firstName": "Max ",
-          "lastName": "ALT",
-          "shortName": "ALT",
-          "nationality": 75,
-          "driverCategory": 2,
-          "playerID": "S76561198802000517"
-        }
-      ],
-      "raceNumber": 517,
-      "forcedCarModel": 82,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Marusa Racing Group - MRG",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Jorens",
-          "lastName": "Saulevics",
-          "shortName": "SAU",
-          "nationality": 59,
-          "driverCategory": 2,
-          "playerID": "S76561198125042565"
-        }
-      ],
-      "raceNumber": 728,
-      "forcedCarModel": 12,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "TGSP",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Phil",
-          "lastName": "Muller",
-          "shortName": "MUL",
-          "nationality": 39,
-          "driverCategory": 2,
-          "playerID": "S76561198004368551"
-        }
-      ],
-      "raceNumber": 39,
-      "forcedCarModel": 14,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Falcon #Jagoff by Triple Stint Racing Gloves",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Oleh",
-          "lastName": "Hoshovskyi",
-          "shortName": "HOS",
-          "nationality": 75,
-          "driverCategory": 2,
-          "playerID": "S76561198162255747"
-        }
-      ],
-      "raceNumber": 690,
-      "forcedCarModel": 85,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "PIECE OF GREAVES",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Leonardo",
-          "lastName": "Rigon",
-          "shortName": "RIG",
-          "nationality": 1,
-          "driverCategory": 0,
-          "playerID": "S76561198324939931"
-        }
-      ],
-      "raceNumber": 41,
-      "forcedCarModel": 51,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Rigon Solo - NLS",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Ari",
-          "lastName": "Floros",
-          "shortName": "FLO",
-          "nationality": 2,
-          "driverCategory": 2,
-          "playerID": "S76561199787224412"
-        },
-        {
-          "firstName": "Harsha ",
-          "lastName": "Andanamala",
-          "shortName": "AND",
-          "nationality": 56,
-          "driverCategory": 2,
-          "playerID": "S76561198721969003"
-        }
-      ],
-      "raceNumber": 45,
-      "forcedCarModel": 3,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Global Fuel Motorsport",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Valerio",
-          "lastName": "Martino",
-          "shortName": "MAR",
-          "nationality": 1,
-          "driverCategory": 1,
-          "playerID": "S76561198169775758"
-        }
-      ],
-      "raceNumber": 111,
-      "forcedCarModel": 9,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Cannotino  - Valerio",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Charles",
-          "lastName": "Watson",
-          "shortName": "WAT",
-          "nationality": 39,
-          "driverCategory": 2,
-          "playerID": "S76561198449931024"
-        }
-      ],
-      "raceNumber": 484,
-      "forcedCarModel": 10,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Tomcats",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Jack",
-          "lastName": "Bayles",
-          "shortName": "BAY",
-          "nationality": 5,
-          "driverCategory": 1,
-          "playerID": "S76561199476219018"
-        }
-      ],
-      "raceNumber": 81,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Masain - Uk",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Marko",
-          "lastName": "Djujich - IFWL",
-          "shortName": "DJU",
-          "nationality": 33,
-          "driverCategory": 2,
-          "playerID": "S76561198076359147"
-        }
-      ],
-      "raceNumber": 737,
-      "forcedCarModel": 14,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "IFWL Racing Team - IFWL #1",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "LTurner",
-          "lastName": "IFWL",
-          "shortName": "IFW",
-          "nationality": 5,
-          "driverCategory": 1,
-          "playerID": "S76561199658871469"
-        }
-      ],
-      "raceNumber": 736,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "IFWL Racing Team - IFWL",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Lukas",
-          "lastName": "Vachtarcik",
-          "shortName": "VAC",
-          "nationality": 53,
-          "driverCategory": 1,
-          "playerID": "S76561198107132831"
-        }
-      ],
-      "raceNumber": 22,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Wrubel Academy - WA",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Pascal",
-          "lastName": "Zander",
-          "shortName": "ZAN",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561198143418422"
-        }
-      ],
-      "raceNumber": 226,
-      "forcedCarModel": 27,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "HOLY MOLY I TOOK A WRONG TURN AND NOW IM RACING ",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Mario",
-          "lastName": "Nervi",
-          "shortName": "NER",
-          "nationality": 1,
-          "driverCategory": 1,
-          "playerID": "S76561199489358035"
-        }
-      ],
-      "raceNumber": 104,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Mfa racing team - MFA Racing team",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Hamza",
-          "lastName": "Baddir",
-          "shortName": "BAD",
-          "nationality": 0,
-          "driverCategory": 1,
-          "playerID": "S76561199495236911"
-        }
-      ],
-      "raceNumber": 991,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Solo endurance - SE",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Ondrej",
-          "lastName": "Batek",
-          "shortName": "BAT",
-          "nationality": 53,
-          "driverCategory": 2,
-          "playerID": "S76561198075553482"
-        }
-      ],
-      "raceNumber": 10,
-      "forcedCarModel": 80,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Jamaica Bobsled Simracing Team - 1",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Aleksandr",
-          "lastName": "Medynskii",
-          "shortName": "MED",
-          "nationality": 0,
-          "driverCategory": 2,
-          "playerID": "S76561199046286847"
-        }
-      ],
-      "raceNumber": 61,
-      "forcedCarModel": 80,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Meet Your Maker - Aleksandr",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Jannik",
-          "lastName": "Haase",
-          "shortName": "HAA",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561199008541359"
-        }
-      ],
-      "raceNumber": 952,
-      "forcedCarModel": 61,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "DIVEBOMB SRT - Gt4 #1",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Marcio",
-          "lastName": "Haupenthal",
-          "shortName": "HAU",
-          "nationality": 17,
-          "driverCategory": 0,
-          "playerID": "S76561197991655060"
-        }
-      ],
-      "raceNumber": 43,
-      "forcedCarModel": 53,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "ItemRaro - Marcio",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Drew",
-          "lastName": "Freiberger",
-          "shortName": "FRE",
-          "nationality": 39,
-          "driverCategory": 0,
-          "playerID": "S76561198051268355"
-        }
-      ],
-      "raceNumber": 419,
-      "forcedCarModel": 60,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Ozark Mountain Daredevils",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Szymon",
-          "lastName": "Chorazy",
-          "shortName": "CHO",
-          "nationality": 13,
-          "driverCategory": 1,
-          "playerID": "S76561198382768030"
-        }
-      ],
-      "raceNumber": 201,
-      "forcedCarModel": 9,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "One Star Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Yusuf",
-          "lastName": "Martin",
-          "shortName": "MAR",
-          "nationality": 4,
-          "driverCategory": 2,
-          "playerID": "S76561199040641815"
-        }
-      ],
-      "raceNumber": 921,
-      "forcedCarModel": 85,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Yumakart Racing Team",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Tomas",
-          "lastName": "Gavenavicius",
-          "shortName": "GAV",
-          "nationality": 60,
-          "driverCategory": 0,
-          "playerID": "S76561198042744756"
-        }
-      ],
-      "raceNumber": 4,
-      "forcedCarModel": 27,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "LTU - United",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Oleksandr",
-          "lastName": "Riv",
-          "shortName": "RIV",
-          "nationality": 75,
-          "driverCategory": 2,
-          "playerID": "S76561198034193742"
-        }
-      ],
-      "raceNumber": 47,
-      "forcedCarModel": 82,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "WOIADA. Watch Out! I'm Driving Around! ",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Philipp",
-          "lastName": "Kamperdicks",
-          "shortName": "KAM",
-          "nationality": 2,
-          "driverCategory": 1,
-          "playerID": "S76561199105575784"
-        },
-        {
-          "firstName": "Sebastian",
-          "lastName": "Gohoreanu",
-          "shortName": "GOH",
-          "nationality": 2,
-          "driverCategory": 1,
-          "playerID": "S76561199562968683"
-        }
-      ],
-      "raceNumber": 573,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Deinonyx Racing - PK Setups",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Markus",
-          "lastName": "Wrede",
-          "shortName": "WRE",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561198046759089"
-        }
-      ],
-      "raceNumber": 16,
-      "forcedCarModel": 60,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Cryonics  - Volto",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Jurgen",
-          "lastName": "Arz",
-          "shortName": "ARZ",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561199067151365"
-        }
-      ],
-      "raceNumber": 26,
-      "forcedCarModel": 53,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "FB-Graphix - GT4",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Leo",
-          "lastName": "Efeckt",
-          "shortName": "EFE",
-          "nationality": 0,
-          "driverCategory": 1,
-          "playerID": "S76561199562328447"
-        }
-      ],
-      "raceNumber": 23,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Clows Bulls",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Delta",
-          "lastName": "Frost",
-          "shortName": "FRO",
-          "nationality": 70,
-          "driverCategory": 2,
-          "playerID": "S76561199046814869"
-        },
-        {
-          "firstName": "Dave",
-          "lastName": "Jarifa",
-          "shortName": "JAR",
-          "nationality": 12,
-          "driverCategory": 2,
-          "playerID": "S76561198218459188"
-        }
-      ],
-      "raceNumber": 21,
-      "forcedCarModel": 85,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Hawken Racing - AM",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "rob",
-          "lastName": "obrochta",
-          "shortName": "OBR",
-          "nationality": 13,
-          "driverCategory": 0,
-          "playerID": "S76561199406440649"
-        }
-      ],
-      "raceNumber": 331,
-      "forcedCarModel": 27,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "G\u00f3ral Motorsports",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Professor",
-          "lastName": "Chronotis",
-          "shortName": "CHR",
-          "nationality": 34,
-          "driverCategory": 0,
-          "playerID": "S76561198047814348"
-        },
-        {
-          "firstName": "Neil",
-          "lastName": "Kerbal",
-          "shortName": "KER",
-          "nationality": 39,
-          "driverCategory": 0,
-          "playerID": "S76561197967388713"
-        }
-      ],
-      "raceNumber": 342,
-      "forcedCarModel": 59,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "WHUA WHUA WHUA NEOW NEOW NEOW SWWWWWSSHHHHHHH",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Samuel",
-          "lastName": "Riek",
-          "shortName": "RIE",
-          "nationality": 39,
-          "driverCategory": 2,
-          "playerID": "S76561199231956139"
-        }
-      ],
-      "raceNumber": 13,
-      "forcedCarModel": 85,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Raptor Racing",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Gael",
-          "lastName": "Duchene",
-          "shortName": "DUC",
-          "nationality": 4,
-          "driverCategory": 0,
-          "playerID": "S76561199859661866"
-        }
-      ],
-      "raceNumber": 8,
-      "forcedCarModel": 51,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "gdgcars - Gael Duch\u00eane ESP [GDG]",
       "ballastKg": 0,
       "restrictor": 0,
       "isServerAdmin": 0
@@ -1582,17 +25,15 @@
           "firstName": "Nicholas",
           "lastName": "woods",
           "shortName": "WOO",
-          "nationality": 39,
           "driverCategory": 0,
+          "nationality": 39,
           "playerID": "S76561198303323030"
         }
       ],
       "raceNumber": 33,
-      "forcedCarModel": 55,
-      "customCar": "",
+      "forcedCarModel": 36,
       "overrideDriverInfo": 1,
       "defaultGridPosition": -1,
-      "teamName": "Meme Dream Racing Team - Nicholas Woods",
       "ballastKg": 0,
       "restrictor": 0,
       "isServerAdmin": 0
@@ -1600,188 +41,18 @@
     {
       "drivers": [
         {
-          "firstName": "Stanislav",
-          "lastName": "Kartavykh",
-          "shortName": "KAR",
-          "nationality": 0,
+          "firstName": "Ewan",
+          "lastName": "Stynes",
+          "shortName": "STY",
           "driverCategory": 0,
-          "playerID": "S76561199100381369"
-        }
-      ],
-      "raceNumber": 777,
-      "forcedCarModel": 27,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Wall-E(njoyers)",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Erik",
-          "lastName": "Pawlowitz  RMS",
-          "shortName": "PAW",
-          "nationality": 2,
-          "driverCategory": 2,
-          "playerID": "S76561199482824378"
-        }
-      ],
-      "raceNumber": 36,
-      "forcedCarModel": 11,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "RTO Esolo -  RTO -",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Leon",
-          "lastName": "Krenn",
-          "shortName": "KRE",
-          "nationality": 2,
-          "driverCategory": 1,
-          "playerID": "S76561199017367401"
-        }
-      ],
-      "raceNumber": 811,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Cryonics  - FlyBy eSports",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Klement",
-          "lastName": "Pannier-Vis",
-          "shortName": "PAN",
-          "nationality": 3,
-          "driverCategory": 2,
-          "playerID": "S76561198300636884"
-        }
-      ],
-      "raceNumber": 93,
-      "forcedCarModel": 84,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Team Verstappen Racing - 93",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Weishen",
-          "lastName": "Wong",
-          "shortName": "WON",
-          "nationality": 62,
-          "driverCategory": 0,
-          "playerID": "S76561198148009931"
-        }
-      ],
-      "raceNumber": 423,
-      "forcedCarModel": 53,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Racing Labs - T.M. Opera O",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Daniel",
-          "lastName": "Doerr",
-          "shortName": "DOE",
-          "nationality": 2,
-          "driverCategory": 1,
-          "playerID": "S76561198015819950"
-        }
-      ],
-      "raceNumber": 49,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Callit Racing Team",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Felix",
-          "lastName": "Blankenburg",
-          "shortName": "BLA",
-          "nationality": 2,
-          "driverCategory": 1,
-          "playerID": "S76561197993479380"
-        }
-      ],
-      "raceNumber": 84,
-      "forcedCarModel": 28,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "FB-Graphix - 911 Cup",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Mohammed Othmane",
-          "lastName": "Ainas",
-          "shortName": "AIN",
-          "nationality": 0,
-          "driverCategory": 2,
-          "playerID": "S76561199232656529"
-        }
-      ],
-      "raceNumber": 63,
-      "forcedCarModel": 29,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Masain - 63",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Marty",
-          "lastName": "Fox",
-          "shortName": "FOX",
           "nationality": 5,
-          "driverCategory": 0,
-          "playerID": "S76561198001592058"
+          "playerID": "S76561198125709560"
         }
       ],
-      "raceNumber": 270,
-      "forcedCarModel": 51,
-      "customCar": "",
+      "raceNumber": 24,
+      "forcedCarModel": 15,
       "overrideDriverInfo": 1,
       "defaultGridPosition": -1,
-      "teamName": "Scottish Legends - GT4",
       "ballastKg": 0,
       "restrictor": 0,
       "isServerAdmin": 0
@@ -1789,133 +60,18 @@
     {
       "drivers": [
         {
-          "firstName": "Fabiano",
-          "lastName": "Haupenthal",
-          "shortName": "HAU",
-          "nationality": 17,
+          "firstName": "Eric",
+          "lastName": "Dangelle",
+          "shortName": "DAN",
           "driverCategory": 0,
-          "playerID": "S76561198086560972"
-        }
-      ],
-      "raceNumber": 667,
-      "forcedCarModel": 53,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "ItemRaro - Fabiano",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Phillip",
-          "lastName": "Schellstede",
-          "shortName": "SCH",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561199121859107"
-        }
-      ],
-      "raceNumber": 158,
-      "forcedCarModel": 60,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Tigerclan Racing - Tigerclan Racing ",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Fabian",
-          "lastName": "Fischer",
-          "shortName": "FIS",
-          "nationality": 2,
-          "driverCategory": 0,
-          "playerID": "S76561199437867771"
-        }
-      ],
-      "raceNumber": 14,
-      "forcedCarModel": 60,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Too Slow Racing Team",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Dru",
-          "lastName": "Burakovski",
-          "shortName": "BUR",
-          "nationality": 39,
-          "driverCategory": 0,
-          "playerID": "S76561199468992127"
-        }
-      ],
-      "raceNumber": 68,
-      "forcedCarModel": 12,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Burakovski Racing Team - BRT",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Maximus",
-          "lastName": "Gluteus",
-          "shortName": "GLU",
-          "nationality": 0,
-          "driverCategory": 0,
-          "playerID": "S76561198139198048"
-        },
-        {
-          "firstName": "Ben",
-          "lastName": "Quadinaros",
-          "shortName": "QUA",
-          "nationality": 13,
-          "driverCategory": 0,
-          "playerID": "S76561198014786514"
-        }
-      ],
-      "raceNumber": 20,
-      "forcedCarModel": 61,
-      "customCar": "",
-      "overrideDriverInfo": 1,
-      "defaultGridPosition": -1,
-      "teamName": "Hawken Racing - AM Second team",
-      "ballastKg": 0,
-      "restrictor": 0,
-      "isServerAdmin": 0
-    },
-    {
-      "drivers": [
-        {
-          "firstName": "Cyril",
-          "lastName": "Weber",
-          "shortName": "WEB",
           "nationality": 8,
-          "driverCategory": 0,
-          "playerID": "S76561198934787439"
+          "playerID": "S76561199389045642"
         }
       ],
-      "raceNumber": 716,
-      "forcedCarModel": 3,
-      "customCar": "",
+      "raceNumber": 31,
+      "forcedCarModel": 35,
       "overrideDriverInfo": 1,
       "defaultGridPosition": -1,
-      "teamName": "Adrenalin Racing Team  - Adrenalin Racing Team ",
       "ballastKg": 0,
       "restrictor": 0,
       "isServerAdmin": 0
@@ -1923,20 +79,56 @@
     {
       "drivers": [
         {
-          "firstName": "Dzuka",
-          "lastName": "Viinar",
-          "shortName": "VII",
-          "nationality": 39,
+          "firstName": "Tiago",
+          "lastName": "Silva",
+          "shortName": "SIL",
           "driverCategory": 0,
-          "playerID": "S76561199528213629"
+          "nationality": 36,
+          "playerID": "S76561199522994341"
         }
       ],
-      "raceNumber": 626,
-      "forcedCarModel": 13,
-      "customCar": "",
+      "raceNumber": 505,
+      "forcedCarModel": 35,
       "overrideDriverInfo": 1,
       "defaultGridPosition": -1,
-      "teamName": "Historic AutoRacing Club",
+      "ballastKg": 0,
+      "restrictor": 0,
+      "isServerAdmin": 0
+    },
+    {
+      "drivers": [
+        {
+          "firstName": "Richard",
+          "lastName": "Odalos",
+          "shortName": "ODA",
+          "driverCategory": 0,
+          "nationality": 20,
+          "playerID": "S76561198726817926"
+        }
+      ],
+      "raceNumber": 17,
+      "forcedCarModel": 30,
+      "overrideDriverInfo": 1,
+      "defaultGridPosition": -1,
+      "ballastKg": 0,
+      "restrictor": 0,
+      "isServerAdmin": 0
+    },
+    {
+      "drivers": [
+        {
+          "firstName": "Gino ",
+          "lastName": "La torre ",
+          "shortName": "LAT",
+          "driverCategory": 0,
+          "nationality": 0,
+          "playerID": "S76561198673781276"
+        }
+      ],
+      "raceNumber": 47,
+      "forcedCarModel": 36,
+      "overrideDriverInfo": 1,
+      "defaultGridPosition": -1,
       "ballastKg": 0,
       "restrictor": 0,
       "isServerAdmin": 0
@@ -1947,17 +139,15 @@
           "firstName": "Brilen",
           "lastName": "McKinstry",
           "shortName": "MCK",
-          "nationality": 82,
           "driverCategory": 0,
+          "nationality": 82,
           "playerID": "S76561198710876260"
         }
       ],
       "raceNumber": 9,
-      "forcedCarModel": 28,
-      "customCar": "",
+      "forcedCarModel": 35,
       "overrideDriverInfo": 1,
       "defaultGridPosition": -1,
-      "teamName": "Full Send Financial Services ",
       "ballastKg": 0,
       "restrictor": 0,
       "isServerAdmin": 0
@@ -1965,20 +155,18 @@
     {
       "drivers": [
         {
-          "firstName": "Stas",
-          "lastName": "Ivanyuk",
-          "shortName": "IVA",
-          "nationality": 75,
+          "firstName": "Hazem",
+          "lastName": "Masmoudi",
+          "shortName": "MAS",
           "driverCategory": 0,
-          "playerID": "S76561199122204426"
+          "nationality": 0,
+          "playerID": "S76561199088654379"
         }
       ],
-      "raceNumber": 313,
-      "forcedCarModel": 61,
-      "customCar": "",
+      "raceNumber": 95,
+      "forcedCarModel": 30,
       "overrideDriverInfo": 1,
       "defaultGridPosition": -1,
-      "teamName": "Ivaniuk Racing - Team",
       "ballastKg": 0,
       "restrictor": 0,
       "isServerAdmin": 0
@@ -1986,7 +174,64 @@
     {
       "drivers": [
         {
-          "playerID": "S76561198074042501"
+          "firstName": "Dariusz",
+          "lastName": "Hirsz",
+          "shortName": "HIR",
+          "driverCategory": 0,
+          "nationality": 13,
+          "playerID": "S76561198031955686"
+        }
+      ],
+      "raceNumber": 221,
+      "forcedCarModel": 34,
+      "overrideDriverInfo": 1,
+      "defaultGridPosition": -1,
+      "ballastKg": 0,
+      "restrictor": 0,
+      "isServerAdmin": 0
+    },
+    {
+      "drivers": [
+        {
+          "firstName": "David",
+          "lastName": "SERRANO",
+          "shortName": "SER",
+          "driverCategory": 0,
+          "nationality": 4,
+          "playerID": "S76561198440822275"
+        }
+      ],
+      "raceNumber": 160,
+      "forcedCarModel": 33,
+      "overrideDriverInfo": 1,
+      "defaultGridPosition": -1,
+      "ballastKg": 0,
+      "restrictor": 0,
+      "isServerAdmin": 0
+    },
+    {
+      "drivers": [
+        {
+          "firstName": "David",
+          "lastName": "Vivian",
+          "shortName": "VIV",
+          "driverCategory": 0,
+          "nationality": 39,
+          "playerID": "S76561199099503129"
+        }
+      ],
+      "raceNumber": 85,
+      "forcedCarModel": 34,
+      "overrideDriverInfo": 1,
+      "defaultGridPosition": -1,
+      "ballastKg": 0,
+      "restrictor": 0,
+      "isServerAdmin": 0
+    },
+    {
+      "drivers": [
+        {
+          "playerID": "S76561198118711829"
         }
       ],
       "isServerAdmin": 1
@@ -1994,7 +239,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561197970456660"
+          "playerID": "S76561198135076414"
         }
       ],
       "isServerAdmin": 1
@@ -2002,7 +247,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561199166051317"
+          "playerID": "S76561197966545521"
         }
       ],
       "isServerAdmin": 1
@@ -2010,7 +255,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561198085991169"
+          "playerID": "S76561198008420192"
         }
       ],
       "isServerAdmin": 1
@@ -2018,7 +263,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561199152036148"
+          "playerID": "S76561198110188569"
         }
       ],
       "isServerAdmin": 1
@@ -2026,7 +271,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561199557208999"
+          "playerID": "S76561199126508271"
         }
       ],
       "isServerAdmin": 1
@@ -2034,7 +279,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561198114604882"
+          "playerID": "S76561199036028823"
         }
       ],
       "isServerAdmin": 1
@@ -2042,7 +287,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561198384302754"
+          "playerID": "S76561198037777218"
         }
       ],
       "isServerAdmin": 1
@@ -2050,7 +295,7 @@
     {
       "drivers": [
         {
-          "playerID": "S"
+          "playerID": "S76561199406440649"
         }
       ],
       "isServerAdmin": 1
@@ -2058,7 +303,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561197981192887"
+          "playerID": "S76561199226330068"
         }
       ],
       "isServerAdmin": 1
@@ -2066,79 +311,7 @@
     {
       "drivers": [
         {
-          "playerID": "S76561199819916480"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S76561199151883917"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S76561199809915250"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S76561199509985988"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S76561198990483837"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S76561197988725803"
-        }
-      ],
-      "isServerAdmin": 1
-    },
-    {
-      "drivers": [
-        {
-          "playerID": "S"
+          "playerID": "S76561199228282741"
         }
       ],
       "isServerAdmin": 1

@@ -68,7 +68,6 @@ def upload_entry_list(driver, upload_page_url, file_path, entry_list_name, serve
     # if we didn't select the right option, take no action
     dropdown_element = driver.find_element(By.ID, "ServerID")
     current_value = dropdown_element.get_attribute("value")
-    print(f"Dropdown value is now: {current_value}")
     is_correct_selection = current_value == server_selection_value
     if not is_correct_selection:
         print("Incorrect selection chosen, returning to prevent errors")
@@ -257,6 +256,40 @@ def get_simgrid_championships():
     #print(f"SimGrid scraper results = {data}")
     return data
 
+def get_server_side_championships():
+        url = "https://orl-us.circuitcore.net/championships"
+        SERVER_DRIVER.get(url)
+        table = SERVER_DRIVER.find_element(By.TAG_NAME, "table")
+    
+        # Get headers from <thead> (or first row if no thead)
+        header_cells = table.find_elements(By.CLASS_NAME, "text-start")
+        if not header_cells:
+            header_cells = table.find_elements(By.CSS_SELECTOR, "tr:first-child th, tr:first-child td")
+        headers = [cell.text.strip() for cell in header_cells]
+    
+        # Get all data rows from <tbody>
+        rows = table.find_elements(By.CSS_SELECTOR, "tbody tr")
+        if not rows:
+            rows = table.find_elements(By.CSS_SELECTOR, "tr")[1:]  # skip header row if no tbody
+    
+        data = []
+        for row in rows:
+            cells = row.find_elements(By.CSS_SELECTOR, "td")
+            values = [cell.text.strip() for cell in cells]
+            
+            if not values:
+                continue
+            
+            # Find the link in this row (adjust selector if it's only in a specific column)
+            link_elements = row.find_elements(By.TAG_NAME, "a")
+            link = link_elements[0].get_attribute("href") if link_elements else None
+            
+            row_dict = dict(zip(headers, values))
+            row_dict["link"] = link
+            data.append(row_dict)
+    
+        return data
+
 def get_value_case_insensitive(row, key):
     key = key.lower()
     for k, v in row.items():
@@ -284,10 +317,12 @@ def pull_championship_entry_list(championship_id):
 class UploadEntryList(QWidget):        
     SimGridChampionships = []
     ACCChampionships = []
+    ACCServerChampionships = []
     ACCServers = []
     ParentWindow = None
     SelectedChampionship = None
     SelectedServer = None
+    SelectedServerChampionship = None
     
     def __init__(self, Parent:ServerManagerHome):
         super().__init__()
@@ -302,8 +337,10 @@ class UploadEntryList(QWidget):
         self.SimGridChampionships = get_simgrid_championships()
         self.ACCChampionships = filter_acc_championships(self.SimGridChampionships, "game")
         self.ACCServers = get_acc_servers()
+        self.ACCServerChampionships = get_server_side_championships()
         self.populate_championship_dropdown()
         self.populate_server_dropdown()
+        self.populate_server_championships_dropdown()
 
         self.stack.addWidget(self.page1)  # index 0
 
@@ -326,9 +363,13 @@ class UploadEntryList(QWidget):
 
         self.from_label = QLabel("SimGrid Championship")
         self.to_label = QLabel("Target Server")
+        self.server_championship_dropdown = QLabel("Target Server")
 
         self.from_dropdown = QComboBox()
         self.from_dropdown.currentIndexChanged.connect(self.championship_selection_changed)
+        
+        self.server_championship_dropdown = QComboBox()
+        self.server_championship_dropdown.currentIndexChanged.connect(self.server_championship_selection_changed)
         
         self.textbox = QLineEdit()
         self.name_label = QLabel("Entry List Name:")
@@ -349,19 +390,26 @@ class UploadEntryList(QWidget):
 
         grid.addWidget(self.from_label, 2, 0, alignment=Qt.AlignmentFlag.AlignCenter)
         grid.addWidget(self.to_label, 2, 2, alignment=Qt.AlignmentFlag.AlignCenter)
+        grid.addWidget(self.to_label, 4, 0, alignment=Qt.AlignmentFlag.AlignCenter)
 
         grid.addWidget(self.from_dropdown, 3, 0)
         grid.addWidget(self.arrow_label, 3, 1)
         grid.addWidget(self.to_dropdown, 3, 2)
         
-        grid.addWidget(self.name_label, 4, 0, 1, 3)
-        grid.addWidget(self.textbox, 5, 0, 1, 3)
+        grid.addWidget(self.server_championship_dropdown, 5, 0)
+        
+        grid.addWidget(self.name_label, 6, 0, 1, 3)
+        grid.addWidget(self.textbox, 7, 0, 1, 3)
 
-        grid.addWidget(self.bottom_button, 6, 0, 1, 3)
+        grid.addWidget(self.bottom_button, 8, 0, 1, 3)
         page.setLayout(grid)
         
         return page
     
+    def server_championship_selection_changed(self):
+        self.SelectedServerChampionship = self.from_dropdown.currentData()
+        print(self.SelectedServerChampionship)
+            
     def championship_selection_changed(self):
         self.SelectedChampionship = self.from_dropdown.currentData()
         print(self.SelectedChampionship)
@@ -376,20 +424,26 @@ class UploadEntryList(QWidget):
             status = row.get("STATUS", "")
             game = row.get("GAME", "")
             if status == "ACC":
-                print(f"adding row to dropdown: {row}")
-                self.from_dropdown.addItem(game, userData=row)  # full dict travels with the item
+                self.from_dropdown.addItem(game, userData=row)
     
     def populate_server_dropdown(self):
-            self.to_dropdown.clear()
-            for row in self.ACCServers:
-                print(f"adding row to dropdown: {row}")
-                server_name = row.get("text", "")
-                self.to_dropdown.addItem(server_name, userData=row)
+        self.to_dropdown.clear()
+        for row in self.ACCServers:
+            server_name = row.get("text", "")
+            self.to_dropdown.addItem(server_name, userData=row)
+                
+    def populate_server_championships_dropdown(self):
+        self.server_championship_dropdown.clear()
+        for row in self.ACCServerChampionships:
+            champ_name = row.get("Name", "")
+            self.server_championship_dropdown.addItem(champ_name, userData=row) 
                 
     def btn_upload_entry_list(self):
        championship_data = self.from_dropdown.currentData()
        server_data = self.to_dropdown.currentData()
        entry_list_name = self.textbox.text()
+       server_championship_data = self.server_championship_dropdown.currentData()
+       server_championship_edit_url = f"{server_championship_data["link"]}/edit#entry-list"
        
        print(f"Uploading from {championship_data} to {server_data} with Entry List Name {entry_list_name}")
        
@@ -405,6 +459,20 @@ class UploadEntryList(QWidget):
             server_selection_value=server_data["value"],
             submit_selector="button[type='submit']",  # adjust to match the actual submit button on that page
         )
+       
+       # navigate to the championships page so that the user can tag that entry list to a championship
+       # manual process for the time being, but it's better than nothing
+       # hopefully it will be automated soon
+       SERVER_DRIVER.maximize_window()
+       
+       SERVER_DRIVER.get(server_championship_edit_url)
+       print(f"navigating to: {server_championship_edit_url} and selecting button")
+       import_button = WebDriverWait(SERVER_DRIVER, 10).until(
+            EC.element_to_be_clickable((By.ID, "entrylist-selector"))
+            )
+       import_button.click()
+       
+       # rest of the process is up to the user
     
     def create_server_manager_home(self):
         page = QWidget()
