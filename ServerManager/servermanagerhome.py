@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import (
     QApplication, QWidget, QPushButton, QVBoxLayout, QStackedWidget, QLabel
 )
 from typing import TYPE_CHECKING
+from ServerManager.uploadentrylist import UploadEntryList
 if TYPE_CHECKING:
     from main import MainWindow
 
@@ -22,8 +23,7 @@ class ServerManagerHome(QWidget):
         self.create_pages()
 
         self.stack.addWidget(self.page1)  # index 0
-        #self.stack.addWidget(self.page2)  # index 1
-        #self.stack.addWidget(self.page3)  # index 3
+        self.stack.addWidget(self.page2)  # index 1
 
         layout = QVBoxLayout()
         layout.addWidget(self.stack, alignment=Qt.AlignmentFlag.AlignCenter)
@@ -31,7 +31,7 @@ class ServerManagerHome(QWidget):
         
     def create_pages(self):
         self.page1 = self.create_server_manager_menu()
-        #self.page2 = self.create_server_manager_home()
+        self.page2 = self.create_upload_entrylist_page()
         #self.page3 = self.create_incident_manager_home()
         
     def print_breadcrumb(self, pageToNav:str):
@@ -61,8 +61,8 @@ class ServerManagerHome(QWidget):
         return page
     
     def btn_upload_entry_list(self):
-        url = "https://orl-us.circuitcore.net/entry-lists/upload"
-        webbrowser.open_new_tab(url)
+        self.print_breadcrumb("Server Manager - Home")
+        self.stack.setCurrentIndex(1)
         
     def btn_manage_championships(self):
         # new page that will bring back all championships in a dropdown list. you select one, and it will let you
@@ -90,33 +90,13 @@ class ServerManagerHome(QWidget):
         page.setLayout(layout)
         return page
     
-    def create_incident_manager_home(self):
-            page = QWidget()
-            layout = QVBoxLayout()
-    
-            label = QLabel("Incident Manager - Home")
-    
-            back_button = QPushButton("Back to Main Menu")
-            back_button.clicked.connect(self.return_to_main_menu)
-    
-            layout.addWidget(label)
-            layout.addWidget(back_button)
-            page.setLayout(layout)
-            return page
-
-    def btn_server_manager_click(self):
-        self.print_breadcrumb("Server Manager - Home")
-        self.stack.setCurrentIndex(1)
-        # TODO spawn a new server manager page here
-
-    def btn_incident_manager_click(self):
-        self.print_breadcrumb("Incident Manager - Home")
-        self.stack.setCurrentIndex(2)
-        # TODO spawn an incident manager page here
+    def create_upload_entrylist_page(self):
+        page = UploadEntryList(self)
+        return page
 
     def return_to_main_menu(self):
         self.ParentWindow.return_to_main_menu()
         
     # children pages of server manager will use this function
     def return_to_server_manager_home(self):
-        self.ParentWindow.btn_server_manager_click()
+        self.stack.setCurrentIndex(0)
