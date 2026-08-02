@@ -24,6 +24,8 @@ class MainWindow(QWidget):
         self.setWindowTitle("Marshal")
         self.resize(800, 450)
         self.center_on_screen()
+        
+        self.active_drivers = [] 
 
         self.stack = QStackedWidget()
 
@@ -37,6 +39,19 @@ class MainWindow(QWidget):
         layout = QVBoxLayout()
         layout.addWidget(self.stack, alignment=Qt.AlignmentFlag.AlignCenter)
         self.setLayout(layout)
+        
+    def closeEvent(self, event):
+        self.quit_all_drivers()
+        event.accept()
+
+    def quit_all_drivers(self):
+        for driver in self.active_drivers:
+            print(f"closing driver {driver}")
+            try:
+                driver.quit()
+            except Exception as e:
+                print(f"Error quitting driver: {e}")
+        self.active_drivers.clear()
         
     def center_on_screen(self):
         window_geometry = self.frameGeometry()

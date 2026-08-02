@@ -327,6 +327,8 @@ class UploadEntryList(QWidget):
     def __init__(self, Parent:ServerManagerHome):
         super().__init__()
         self.ParentWindow = Parent
+        self.ParentWindow.ParentWindow.active_drivers.append(SERVER_DRIVER)
+        self.ParentWindow.ParentWindow.active_drivers.append(SIMGRID_DRIVER)
         self.setWindowTitle("Entry List Manager")
         self.setGeometry(100, 100, 300, 200)
 
