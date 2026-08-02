@@ -16,9 +16,75 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import (WebDriverWait, Select)
 from selenium.webdriver.support import expected_conditions as EC
-
 import json
 from pathlib import Path
+import requests
+
+
+def download_json_via_session(driver, url, save_path):
+    session = requests.Session()
+    for cookie in driver.get_cookies():
+        session.cookies.set(cookie["name"], cookie["value"])
+
+    resp = session.get(url)
+    resp.raise_for_status()
+
+    # Try utf-16 first (BOM starting with 0xFF or 0xFE), fall back to utf-8-sig
+    raw = resp.content
+    if raw[:2] in (b"\xff\xfe", b"\xfe\xff"):
+        text = raw.decode("utf-16")
+    else:
+        text = raw.decode("utf-8-sig")
+
+    data = json.loads(text)
+
+    save_path = Path(save_path)
+    save_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(save_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+    return save_path
+
+def select_option_by_value_js(driver, select_id, value):
+    driver.execute_script(f"""
+        var select = document.getElementById('{select_id}');
+        select.value = '{value}';
+        select.dispatchEvent(new Event('change', {{ bubbles: true }}));
+    """)
+
+def upload_entry_list(driver, upload_page_url, file_path, entry_list_name, server_selection_value, submit_selector=None):
+    driver.get(upload_page_url)
+
+    # fill out name field
+    name_input = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "name"))
+    )
+    name_input.clear()
+    name_input.send_keys(entry_list_name)
+    
+    # select from dropdown
+    select_option_by_value_js(driver, "ServerID", server_selection_value)
+    
+    # if we didn't select the right option, take no action
+    dropdown_element = driver.find_element(By.ID, "ServerID")
+    current_value = dropdown_element.get_attribute("value")
+    print(f"Dropdown value is now: {current_value}")
+    is_correct_selection = current_value == server_selection_value
+    if not is_correct_selection:
+        print("Incorrect selection chosen, returning to prevent errors")
+        return
+
+    # input file
+    file_input = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "entryListFile"))
+    )
+
+    absolute_path = str(Path(file_path).resolve())
+    file_input.send_keys(absolute_path)
+
+    if submit_selector:
+        submit_button = driver.find_element(By.CSS_SELECTOR, submit_selector)
+        submit_button.click()
 
 COOKIE_FILE = Path("site_cookies.json")
 
@@ -83,6 +149,9 @@ def get_driver(headless=True):
 
     raise RuntimeError("No supported browser (Chrome, Edge, Firefox) is available on this machine.")
 
+SIMGRID_DRIVER = get_driver()
+SERVER_DRIVER = get_driver(False)
+
 def wait_until_element_appears(driver, text, timeout=300):
     """
     Blocks until the given element appears on the page — regardless of
@@ -99,40 +168,41 @@ def wait_until_element_appears(driver, text, timeout=300):
     return element
 
 def get_acc_servers():
-    driver = get_driver(False)
     base_url = "https://orl-us.circuitcore.net"
     entry_list_url = "https://orl-us.circuitcore.net/entry-lists/upload"
     
-    logged_in = load_cookies(driver, base_url)
-    driver.get(entry_list_url)
+    logged_in = load_cookies(SERVER_DRIVER, base_url)
+    SERVER_DRIVER.get(entry_list_url)
     
     # Confirm we're actually logged in (cookies might be expired)
     try:
-        wait_until_element_appears(driver, "Upload Entry List", 10)
+        wait_until_element_appears(SERVER_DRIVER, "Upload Entry List", 10)
     except TimeoutException:
         logged_in = False
     
     # manual login workflow needed
     if not logged_in:
         # login
-        driver.get(f"{base_url}/login")
+        SERVER_DRIVER.get(f"{base_url}/login")
         print("Please log in manually...")
         
         # login success, we will be on homepage
-        WebDriverWait(driver, 20).until(
+        WebDriverWait(SERVER_DRIVER, 20).until(
             lambda d: d.current_url.rstrip("/") == base_url.rstrip("/")
         )
-        save_cookies(driver)
+        save_cookies(SERVER_DRIVER)
         
         # proceed to entry list upload page
-        driver.get(entry_list_url)
-        
+        SERVER_DRIVER.get(entry_list_url)
+    
+    SERVER_DRIVER.minimize_window()
     # by not we should be logged in, so scrape
-    post_signin_detected = wait_until_element_appears(driver, "Upload Entry List")
+    post_signin_detected = wait_until_element_appears(SERVER_DRIVER, "Upload Entry List")
     if post_signin_detected is None:
         print("User timed out on sign in")
         return []
-    return get_select_options(driver)
+    
+    return get_select_options(SERVER_DRIVER)
 
 def get_select_options(driver):
     """
@@ -154,16 +224,15 @@ def get_select_options(driver):
 
 def get_simgrid_championships():
     # TODO add cookie workflow?
-    driver = get_driver()
     url = "https://www.thesimgrid.com/communities/odysseyracingleague/championships?host_id=176&type=active"
-    driver.get(url)
+    SIMGRID_DRIVER.get(url)
     
-    post_signin_detected = wait_until_element_appears(driver, "Championships & Events")
+    post_signin_detected = wait_until_element_appears(SIMGRID_DRIVER, "Championships & Events")
     if post_signin_detected is None:
         print("User timed out on sign in")
         return []
     
-    table = driver.find_element(By.TAG_NAME, "table")
+    table = SIMGRID_DRIVER.find_element(By.TAG_NAME, "table")
 
     # Get headers from <thead> (or first row if no thead)
     header_cells = table.find_elements(By.CLASS_NAME, "text-start")
@@ -206,6 +275,11 @@ def filter_acc_championships(all_championships, key="game"):
 
 def get_championship_names(data, key="GAME"):
     return [row.get(key, "") for row in data if row.get(key)]
+
+def pull_championship_entry_list(championship_id):
+    url = f"https://www.thesimgrid.com/admin/championships/{championship_id}/entrylist.json"
+    file_path = download_json_via_session(SIMGRID_DRIVER, url, "downloads/entrylist.json")
+    return file_path
 
 class UploadEntryList(QWidget):        
     SimGridChampionships = []
@@ -319,8 +393,18 @@ class UploadEntryList(QWidget):
        
        print(f"Uploading from {championship_data} to {server_data} with Entry List Name {entry_list_name}")
        
-       # TODO process to pull, download, and push up to server
-       pass
+       # pull entry list
+       file_path = pull_championship_entry_list(championship_data["NAME"])
+       
+       # parse server dropdown and name, pass in the entry list file
+       upload_entry_list(
+            SERVER_DRIVER,
+            upload_page_url="https://orl-us.circuitcore.net/entry-lists/upload",
+            file_path=file_path,
+            entry_list_name=entry_list_name,
+            server_selection_value=server_data["value"],
+            submit_selector="button[type='submit']",  # adjust to match the actual submit button on that page
+        )
     
     def create_server_manager_home(self):
         page = QWidget()
