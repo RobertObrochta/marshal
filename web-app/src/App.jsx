@@ -61,14 +61,14 @@ export default function App() {
     );
   }
 
-  return (
-    <main className="screen">
-      <h1 className="hello">Hello World</h1>
-      <div className="who">
-        {user.avatar && <img src={user.avatar} alt="" width="32" height="32" />}
-        <span>Signed in as {user.displayName}</span>
-      </div>
-      <button className="btn ghost" onClick={logout}>Log out</button>
-    </main>
-  );
+ return (
+  <main className="screen">
+    <h1 className="hello">Hello World</h1>
+    <div className="who">
+      {user.avatar && <img src={user.avatar} alt="" width="32" height="32" />}
+      <span>Signed in as {user.displayName}</span>
+      <button className="btn ghost small" onClick={logout}>Log out</button>
+    </div>
+  </main>
+);
 }
