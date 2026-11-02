@@ -1,0 +1,18 @@
+[
+  {
+    "id": "d-001",
+    "championshipId": 1,
+    "name": "Driver One",
+    "number": 12,
+    "points": 186,
+    "status": "Clear"
+  },
+  {
+    "id": "d-002",
+    "championshipId": 1,
+    "name": "Driver Two",
+    "number": 34,
+    "points": 74,
+    "status": "Probation"
+  }
+]

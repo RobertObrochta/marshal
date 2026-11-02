@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import ChampionshipsMenu from "./ChampionshipsMenu.jsx";
+import Verdicts from "./Verdicts.jsx";
+import DriverStatus from "./DriverStatus.jsx";
+import NewChampionship from "./NewChampionship.jsx";
 
 const ERRORS = {
   access_denied: "You cancelled the Discord login.",
@@ -9,6 +13,8 @@ const ERRORS = {
 export default function App() {
   const [status, setStatus] = useState("loading"); // loading | anon | authed | error
   const [user, setUser] = useState(null);
+  const [view, setView] = useState(null);
+  const [championshipsKey, setChampionshipsKey] = useState(0);
   const [loginError, setLoginError] = useState(null);
 
   useEffect(() => {
@@ -36,6 +42,7 @@ export default function App() {
   async function logout() {
     await fetch("/api/auth/logout", { method: "POST" });
     setUser(null);
+    setView(null);
     setStatus("anon");
   }
 
@@ -60,10 +67,16 @@ export default function App() {
       </main>
     );
   }
-
+  
  return (
   <main className="screen">
-    <h1 className="hello">Hello World</h1>
+    <ChampionshipsMenu onSelect={setView} reloadKey={championshipsKey} />
+      {view?.page === "New Championship" && (
+        <NewChampionship onCreated={() => setChampionshipsKey((k) => k + 1)} />
+      )}
+    {view?.page === "Verdicts" && <Verdicts championship={view.championship} />}
+    {view?.page === "Driver Status" && <DriverStatus championship={view.championship} />}
+    {!view && <h1 className="hello">Hello World</h1>}
     <div className="who">
       {user.avatar && <img src={user.avatar} alt="" width="32" height="32" />}
       <span>Signed in as {user.displayName}</span>
