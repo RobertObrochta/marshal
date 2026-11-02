@@ -19,6 +19,9 @@ const ERRORS = {
   championship_not_found: "That championship no longer exists.",
   not_authenticated: "Your session expired. Reload and log in again.",
   not_authorized: "Your session expired. Reload and log in again.",
+  driver_not_found:
+  "Points can only go to a driver listed in this championship's Driver Status. Pick a listed driver, or add them there first.",
+  driver_ambiguous: "Two drivers in this championship share that name, so the points can't be applied. Fix the duplicate in Driver Status.",
 };
 
 const EMPTY = {

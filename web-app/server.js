@@ -98,9 +98,11 @@ async function requireAdmin(req, res, next) {
 
 // ---------- Data files ----------
 
+// DATA_DIR is the folder that CONTAINS data/ (data/championships.json, etc.).
+// Defaults to the project folder.
 const DATA_DIR =
   process.env.DATA_DIR ||
-  path.join(path.dirname(fileURLToPath(import.meta.url)), "data");
+  path.dirname(fileURLToPath(import.meta.url));
 
 async function sendData(res, file, filter = () => true) {
   try {
@@ -116,10 +118,25 @@ async function sendData(res, file, filter = () => true) {
 // at once and overwrite each other (or get the same ID).
 let writeQueue = Promise.resolve();
 
+// Writes every temp file first, then swaps them in, so a failed write can't
+// leave one file updated and another not (a crash mid-write can't corrupt JSON).
+async function writeJsonFiles(entries) {
+  for (const [file, data] of entries) {
+    await writeFile(`${file}.tmp`, JSON.stringify(data, null, 2) + "\n");
+  }
+  for (const [file] of entries) {
+    await rename(`${file}.tmp`, file);
+  }
+}
+
 async function writeJsonAtomic(file, data) {
-  const tmp = `${file}.tmp`;
-  await writeFile(tmp, JSON.stringify(data, null, 2) + "\n");
-  await rename(tmp, file); // a crash mid-write can't corrupt the JSON
+  await writeJsonFiles([[file, data]]);
+}
+
+function codedError(code) {
+  const err = new Error(code);
+  err.code = code;
+  return err;
 }
 
 function addChampionship({ name, rounds }) {
@@ -145,55 +162,6 @@ function addChampionship({ name, rounds }) {
 
     await writeJsonAtomic(file, list);
     return championship;
-  });
-  writeQueue = job.catch(() => {});
-  return job;
-}
-
-function addDriverStatusPoints(
-  championshipId,
-  { accusedDriver, points }
-) {
-  const job = writeQueue.then(async () => {
-    // 1. Verify championship exists
-    const championships = JSON.parse(
-      await readFile(path.join(DATA_DIR, "data/championships.json"), "utf8")
-    );
-    const championship = championships.find((c) => String(c.id) === String(championshipId));
-    if (!championship) {
-      const err = new Error("no championship");
-      err.code = "NO_CHAMPIONSHIP";
-      throw err;
-    }
-
-    // 2. Read driver-status.json (which contains the array of drivers)
-    const file = path.join(DATA_DIR, "data/driver-status.json");
-    let drivers = [];
-    try {
-      drivers = JSON.parse(await readFile(file, "utf8"));
-    } catch (err) {
-      if (err.code !== "ENOENT") throw err;
-    }
-
-    // 3. Find the specific driver matching the championship and name
-    const driver = drivers.find(
-      (d) =>
-        String(d.championshipId) === String(championship.id) &&
-        String(d.name).toLowerCase() === String(accusedDriver).toLowerCase()
-    );
-
-    if (!driver) {
-      const err = new Error("Driver not found");
-      err.code = "DRIVER_NOT_FOUND";
-      throw err;
-    }
-
-    // 4. Increment the points directly on that driver's object
-    driver.points = (Number(driver.points) || 0) + Number(points);
-
-    // 5. Save the updated list atomically back to the file
-    await writeJsonAtomic(file, drivers);
-    return driver;
   });
   writeQueue = job.catch(() => {});
   return job;
@@ -235,6 +203,28 @@ function addVerdict(
       if (err.code !== "ENOENT") throw err;
     }
 
+    // Points are added to the accused driver's total in this championship.
+    // They must match exactly one driver, otherwise nothing is saved.
+    const driversFile = path.join(DATA_DIR, "data/driver-status.json");
+    let drivers = null;
+    if (points !== 0) {
+      try {
+        drivers = JSON.parse(await readFile(driversFile, "utf8"));
+      } catch (err) {
+        if (err.code !== "ENOENT") throw err;
+        drivers = [];
+      }
+      const want = accusedDriver.toLowerCase();
+      const matches = drivers.filter(
+        (d) =>
+          String(d.championshipId) === String(championship.id) &&
+          String(d.name).trim().toLowerCase() === want
+      );
+      if (matches.length === 0) throw codedError("DRIVER_NOT_FOUND");
+      if (matches.length > 1) throw codedError("DRIVER_AMBIGUOUS");
+      matches[0].points = (Number(matches[0].points) || 0) + points;
+    }
+
     const record = {
       id: nextVerdictId(list),
       championshipId: championship.id,
@@ -244,6 +234,59 @@ function addVerdict(
       accusedDriver,
       verdict,
       detail,
+      points,
+    };
+    list.push(record);
+
+    await writeJsonFiles([
+      [file, list],
+      ...(drivers ? [[driversFile, drivers]] : []),
+    ]);
+    return record;
+  });
+  writeQueue = job.catch(() => {});
+  return job;
+}
+
+function nextDriverId(list) {
+  const n = list.reduce((max, d) => {
+    const m = /^d-(\d+)$/.exec(String(d.id));
+    return m ? Math.max(max, Number(m[1])) : max;
+  }, 0);
+  return `d-${String(n + 1).padStart(3, "0")}`;
+}
+
+function addDriver(championshipId, { name, number, points, status }) {
+  const job = writeQueue.then(async () => {
+    const championships = JSON.parse(
+      await readFile(path.join(DATA_DIR, "data/championships.json"), "utf8")
+    );
+    const championship = championships.find((c) => String(c.id) === String(championshipId));
+    if (!championship) throw codedError("NO_CHAMPIONSHIP");
+
+    const file = path.join(DATA_DIR, "data/driver-status.json");
+    let list = [];
+    try {
+      list = JSON.parse(await readFile(file, "utf8"));
+    } catch (err) {
+      if (err.code !== "ENOENT") throw err;
+    }
+
+    // Names must be unique per championship, because verdict points find the
+    // accused driver by name. Car numbers must be unique too.
+    const here = list.filter((d) => String(d.championshipId) === String(championship.id));
+    if (here.some((d) => String(d.name).trim().toLowerCase() === name.toLowerCase())) {
+      throw codedError("DUPLICATE_NAME");
+    }
+    if (here.some((d) => Number(d.number) === number)) {
+      throw codedError("DUPLICATE_NUMBER");
+    }
+
+    const record = {
+      id: nextDriverId(list),
+      championshipId: championship.id,
+      name,
+      number,
       points,
     };
     list.push(record);
@@ -419,27 +462,23 @@ app.post("/api/championships/:id/verdicts", requireAdmin, async (req, res) => {
   }
 
   try {
-    // 1. Add the verdict entry
-    const newVerdict = await addVerdict(req.params.id, {
-      round, incident, reporter, accusedDriver, verdict, detail, points,
-    });
-
-    // 2. Update driver points if points were awarded or deducted
-    if (points !== 0) {
-      await addDriverStatusPoints(req.params.id, {
-        round, accusedDriver, points,
-      });
-    }
-
-    // 3. Return the created verdict
-    res.status(201).json(newVerdict);
-
+    res.status(201).json(
+      await addVerdict(req.params.id, {
+        round, incident, reporter, accusedDriver, verdict, detail, points,
+      })
+    );
   } catch (err) {
     if (err.code === "NO_CHAMPIONSHIP") {
       return res.status(404).json({ error: "championship_not_found" });
     }
     if (err.code === "INVALID_ROUND") {
       return res.status(400).json({ error: "invalid_round" });
+    }
+    if (err.code === "DRIVER_NOT_FOUND") {
+      return res.status(400).json({ error: "driver_not_found" });
+    }
+    if (err.code === "DRIVER_AMBIGUOUS") {
+      return res.status(409).json({ error: "driver_ambiguous" });
     }
     console.error(err);
     res.status(500).json({ error: "write_failed" });
@@ -453,42 +492,43 @@ app.get("/api/championships/:id/drivers", requireAdmin, (req, res) =>
 
 app.post("/api/championships/:id/drivers", requireAdmin, async (req, res) => {
   const b = req.body ?? {};
-  console.log(req);
   const str = (v) => (typeof v === "string" ? v.trim() : "");
   const blank = (v) => v === undefined || v === null || v === "";
 
-  const round = Number(b.round);
-  const accusedDriver = str(b.accusedDriver);
+  const name = str(b.name);
+  const number = Number(b.number);
   const points = blank(b.points) ? 0 : Number(b.points);
+  const status = str(b.status);
 
-  if (!Number.isInteger(round) || round < 1) {
-    return res.status(400).json({ error: "invalid_round" });
+  if (!name || name.length > 60) {
+    return res.status(400).json({ error: "invalid_name" });
   }
-  if (!accusedDriver || accusedDriver.length > 60) {
-    return res.status(400).json({ error: "invalid_accused_driver" });
+  if (name.toLowerCase() === "steward") {
+    return res.status(400).json({ error: "reserved_name" }); // "Steward" is a pinned dropdown entry
   }
-  if (!Number.isInteger(points) || points < -99 || points > 99) {
+  if (!Number.isInteger(number) || number < 1 || number > 999) {
+    return res.status(400).json({ error: "invalid_number" });
+  }
+  if (!Number.isInteger(points) || points < -9999 || points > 9999) {
     return res.status(400).json({ error: "invalid_points" });
   }
 
   try {
-    res.status(201).json(
-      await addDriverStatusPoints(req.params.id, {
-        round, accusedDriver, points,
-      })
-    );
+    res.status(201).json(await addDriver(req.params.id, { name, number, points, status }));
   } catch (err) {
     if (err.code === "NO_CHAMPIONSHIP") {
       return res.status(404).json({ error: "championship_not_found" });
     }
-    if (err.code === "INVALID_ROUND") {
-      return res.status(400).json({ error: "invalid_round" });
+    if (err.code === "DUPLICATE_NAME") {
+      return res.status(409).json({ error: "duplicate_name" });
+    }
+    if (err.code === "DUPLICATE_NUMBER") {
+      return res.status(409).json({ error: "duplicate_number" });
     }
     console.error(err);
     res.status(500).json({ error: "write_failed" });
   }
 });
-
 
 // In production, serve the built React app from the same server
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
