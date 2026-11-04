@@ -121,6 +121,14 @@ th { color: var(--muted); font-weight: 600; font-size: 0.875rem; }
 .dd { position: relative; }
 .dd input { width: 100%; }
 
+.btn.danger { background: #c0392b; }
+.btn.danger:hover { background: #a93226; }
+.row-actions { white-space: nowrap; text-align: right; }
+.row-actions .btn + .btn { margin-left: 0.5rem; }
+.menu-danger { color: #ff8a8a; }
+.menu-danger.confirming { background: rgba(255, 99, 71, 0.16); font-weight: 600; }
+.menu-error { color: var(--danger); }
+
 .dd-trigger {
   display: flex;
   align-items: center;

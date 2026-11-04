@@ -16,12 +16,24 @@ const ERRORS = {
   invalid_verdict: "Pick a verdict.",
   invalid_detail: "Detail is too long (100 characters max).",
   invalid_points: "Points must be a whole number from -99 to 99.",
+  driver_not_found:
+    "Points can only go to a driver listed in this championship's Driver Status. Pick a listed driver, or add them there first.",
+  driver_ambiguous: "Two drivers in this championship share that name, so the points can't be applied. Fix the duplicate in Driver Status.",
+  championship_ended: "This championship has been ended. Reopen it from History to make changes.",
   championship_not_found: "That championship no longer exists.",
   not_authenticated: "Your session expired. Reload and log in again.",
   not_authorized: "Your session expired. Reload and log in again.",
-  driver_not_found:
-  "Points can only go to a driver listed in this championship's Driver Status. Pick a listed driver, or add them there first.",
-  driver_ambiguous: "Two drivers in this championship share that name, so the points can't be applied. Fix the duplicate in Driver Status.",
+};
+
+const REMOVE_ERRORS = {
+  verdict_not_found: "That verdict is already gone.",
+  championship_ended: "This championship has been ended. Reopen it from History to make changes.",
+  points_driver_missing:
+    "Can't remove it: the accused driver isn't in Driver Status any more, so their points can't be taken back. Restore the driver first.",
+  points_driver_ambiguous:
+    "Can't remove it: two drivers in Driver Status share the accused driver's name, so the points can't be taken back. Fix the duplicate first.",
+  not_authenticated: "Your session expired. Reload and log in again.",
+  not_authorized: "Your session expired. Reload and log in again.",
 };
 
 const EMPTY = {
@@ -45,25 +57,71 @@ export default function Verdicts({ championship }) {
     reloadKey
   );
   const { data: drivers } = useApi(`/api/championships/${championship.id}/drivers`);
+  const { data: members } = useApi("/api/entry-list"); // Discord members, filled in by the bot
   const [adding, setAdding] = useState(false);
   const [form, setForm] = useState(EMPTY);
   const [busy, setBusy] = useState(false);
   const [saveError, setSaveError] = useState(null);
+  const [confirmId, setConfirmId] = useState(null); // verdict awaiting a second click
+  const [removingId, setRemovingId] = useState(null);
+  const [removeError, setRemoveError] = useState(null);
 
   // Switching championships closes and clears the form
   useEffect(() => {
     setAdding(false);
     setForm(EMPTY);
     setSaveError(null);
+    setConfirmId(null);
+    setRemoveError(null);
   }, [championship.id]);
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
   const setValue = (key) => (v) => setForm((f) => ({ ...f, [key]: v }));
-  const driverNames = drivers?.map((d) => d.name) ?? [];
+  // Suggestions for Reporter and Accused: Driver Status names first (only they
+  // can receive points), then Discord members A-Z, without duplicates.
+  const nameOptions = (() => {
+    const seen = new Set();
+    const out = [];
+    const add = (n) => {
+      const name = String(n ?? "").trim();
+      if (name && !seen.has(name.toLowerCase())) {
+        seen.add(name.toLowerCase());
+        out.push(name);
+      }
+    };
+    drivers?.forEach((d) => add(d.name));
+    [...(members ?? [])]
+      .map((m) => m.displayName || m.username)
+      .sort((a, b) => String(a).localeCompare(String(b)))
+      .forEach(add);
+    return out;
+  })();
 
   function cancel() {
     setAdding(false);
     setSaveError(null);
+  }
+
+  // Deletes the verdict; the server also takes its points back off the accused driver
+  async function remove(id) {
+    setRemovingId(id);
+    setRemoveError(null);
+    try {
+      const res = await fetch(`/api/championships/${championship.id}/verdicts/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setRemoveError(REMOVE_ERRORS[body.error] ?? "Couldn't remove the verdict. Try again.");
+        return;
+      }
+      setConfirmId(null);
+      setReloadKey((k) => k + 1);
+    } catch {
+      setRemoveError("Can't reach the server.");
+    } finally {
+      setRemovingId(null);
+    }
   }
 
   async function submit(e) {
@@ -144,7 +202,7 @@ export default function Verdicts({ championship }) {
               <Combobox
                 value={form.reporter}
                 onChange={setValue("reporter")}
-                options={driverNames}
+                options={nameOptions}
                 pinned={PINNED}
                 maxLength={60}
                 required
@@ -155,7 +213,7 @@ export default function Verdicts({ championship }) {
               <Combobox
                 value={form.accusedDriver}
                 onChange={setValue("accusedDriver")}
-                options={driverNames}
+                options={nameOptions}
                 pinned={PINNED}
                 maxLength={60}
                 required
@@ -207,6 +265,7 @@ export default function Verdicts({ championship }) {
         </form>
       )}
 
+      {removeError && <p className="error" role="alert">{removeError}</p>}
       {error && <p className="error">Couldn't load verdicts.</p>}
       {rows?.length === 0 && <p className="muted">No verdicts yet.</p>}
       {rows?.length > 0 && (
@@ -221,6 +280,7 @@ export default function Verdicts({ championship }) {
                 <th>Verdict</th>
                 <th>Detail</th>
                 <th>Points</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -241,6 +301,33 @@ export default function Verdicts({ championship }) {
                   <td>{v.verdict}</td>
                   <td>{v.detail}</td>
                   <td>{formatPoints(v)}</td>
+                  <td className="row-actions">
+                    {confirmId === v.id ? (
+                      <>
+                        <button
+                          className="btn small danger"
+                          title="Deletes the verdict and reverses its points"
+                          disabled={removingId === v.id}
+                          onClick={() => remove(v.id)}
+                        >
+                          {removingId === v.id ? "Removing…" : "Confirm"}
+                        </button>
+                        <button className="btn small ghost" onClick={() => setConfirmId(null)}>
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        className="btn small ghost"
+                        onClick={() => {
+                          setRemoveError(null);
+                          setConfirmId(v.id);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

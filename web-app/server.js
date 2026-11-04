@@ -6,6 +6,7 @@ import { readFile, writeFile, rename } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import express from "express";
 import cookieParser from "cookie-parser";
+import { startBot } from "./Bot.js";
 
 const {
   DISCORD_CLIENT_ID,
@@ -157,7 +158,7 @@ function addChampionship({ name, rounds }) {
     }
 
     const id = list.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0) + 1;
-    const championship = { id, name, rounds };
+    const championship = { id, name, rounds, status: "active" };
     list.push(championship);
 
     await writeJsonAtomic(file, list);
@@ -189,6 +190,7 @@ function addVerdict(
       err.code = "NO_CHAMPIONSHIP";
       throw err;
     }
+    if (championship.status === "ended") throw codedError("CHAMPIONSHIP_ENDED");
     if (championship.rounds && round > championship.rounds) {
       const err = new Error("round out of range");
       err.code = "INVALID_ROUND";
@@ -256,13 +258,14 @@ function nextDriverId(list) {
   return `d-${String(n + 1).padStart(3, "0")}`;
 }
 
-function addDriver(championshipId, { name, number, points, status }) {
+function addDriver(championshipId, { name, number, points}) {
   const job = writeQueue.then(async () => {
     const championships = JSON.parse(
       await readFile(path.join(DATA_DIR, "data/championships.json"), "utf8")
     );
     const championship = championships.find((c) => String(c.id) === String(championshipId));
     if (!championship) throw codedError("NO_CHAMPIONSHIP");
+    if (championship.status === "ended") throw codedError("CHAMPIONSHIP_ENDED");
 
     const file = path.join(DATA_DIR, "data/driver-status.json");
     let list = [];
@@ -298,11 +301,96 @@ function addDriver(championshipId, { name, number, points, status }) {
   return job;
 }
 
+// Deletes a verdict and takes its points back off the accused driver in
+// driver-status.json. Both files are written together or not at all.
+function removeVerdict(championshipId, verdictId) {
+  const job = writeQueue.then(async () => {
+    const championships = JSON.parse(
+      await readFile(path.join(DATA_DIR, "data/championships.json"), "utf8")
+    );
+    const championship = championships.find((c) => String(c.id) === String(championshipId));
+    if (!championship) throw codedError("NO_CHAMPIONSHIP");
+    if (championship.status === "ended") throw codedError("CHAMPIONSHIP_ENDED");
+
+    const verdictsFile = path.join(DATA_DIR, "data/verdicts.json");
+    let list = [];
+    try {
+      list = JSON.parse(await readFile(verdictsFile, "utf8"));
+    } catch (err) {
+      if (err.code !== "ENOENT") throw err;
+    }
+
+    const index = list.findIndex(
+      (v) => v.id === verdictId && String(v.championshipId) === String(championship.id)
+    );
+    if (index === -1) throw codedError("VERDICT_NOT_FOUND");
+    const [removed] = list.splice(index, 1);
+
+    const writes = [[verdictsFile, list]];
+    const points = Number(removed.points) || 0;
+    if (points !== 0) {
+      const driversFile = path.join(DATA_DIR, "data/driver-status.json");
+      let drivers = [];
+      try {
+        drivers = JSON.parse(await readFile(driversFile, "utf8"));
+      } catch (err) {
+        if (err.code !== "ENOENT") throw err;
+      }
+      const want = String(removed.accusedDriver).trim().toLowerCase();
+      const matches = drivers.filter(
+        (d) =>
+          String(d.championshipId) === String(championship.id) &&
+          String(d.name).trim().toLowerCase() === want
+      );
+      // If the points can't be taken back, keep the verdict rather than let the totals drift
+      if (matches.length === 0) throw codedError("DRIVER_NOT_FOUND");
+      if (matches.length > 1) throw codedError("DRIVER_AMBIGUOUS");
+      matches[0].points = (Number(matches[0].points) || 0) - points;
+      writes.push([driversFile, drivers]);
+    }
+
+    await writeJsonFiles(writes);
+    return removed;
+  });
+  writeQueue = job.catch(() => {});
+  return job;
+}
+
+// Ending a championship only flips a flag. Its verdicts and drivers stay where
+// they are, so reopening brings everything back exactly as it was.
+function setChampionshipStatus(championshipId, status) {
+  const job = writeQueue.then(async () => {
+    const file = path.join(DATA_DIR, "data/championships.json");
+    const list = JSON.parse(await readFile(file, "utf8"));
+    const championship = list.find((c) => String(c.id) === String(championshipId));
+    if (!championship) throw codedError("NO_CHAMPIONSHIP");
+
+    if (status === "ended") {
+      if (championship.status !== "ended") {
+        championship.status = "ended";
+        championship.endedAt = new Date().toISOString();
+      }
+    } else {
+      championship.status = "active";
+      delete championship.endedAt;
+    }
+
+    await writeJsonAtomic(file, list);
+    return championship;
+  });
+  writeQueue = job.catch(() => {});
+  return job;
+}
+
 // ---------- Routes ----------
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
+
+// --- Entry list (filled in by the Discord bot) ---
+app.get("/api/entry-list", requireAdmin, (_req, res) =>
+  sendData(res, "data/entry-list.json"));
 
 // Step 1: send the user to Discord
 app.get("/api/auth/login", (_req, res) => {
@@ -398,8 +486,13 @@ app.post("/api/auth/logout", (_req, res) => {
 
 // --- Championships ---
 
-app.get("/api/championships", requireAdmin, (_req, res) =>
-  sendData(res, "data/championships.json"));
+// Active championships by default. ?status=ended for the history view, ?status=all for both.
+app.get("/api/championships", requireAdmin, (req, res) => {
+  const want = req.query.status;
+  sendData(res, "data/championships.json", (c) =>
+    want === "all" ? true : want === "ended" ? c.status === "ended" : c.status !== "ended"
+  );
+});
 
 app.post("/api/championships", requireAdmin, async (req, res) => {
   const name = typeof req.body?.name === "string" ? req.body.name.trim() : "";
@@ -420,6 +513,20 @@ app.post("/api/championships", requireAdmin, async (req, res) => {
     res.status(500).json({ error: "write_failed" });
   }
 });
+
+const statusRoute = (status) => async (req, res) => {
+  try {
+    res.json(await setChampionshipStatus(req.params.id, status));
+  } catch (err) {
+    if (err.code === "NO_CHAMPIONSHIP") {
+      return res.status(404).json({ error: "championship_not_found" });
+    }
+    console.error(err);
+    res.status(500).json({ error: "write_failed" });
+  }
+};
+app.post("/api/championships/:id/end", requireAdmin, statusRoute("ended"));
+app.post("/api/championships/:id/reopen", requireAdmin, statusRoute("active"));
 
 // --- Verdicts ---
 
@@ -480,6 +587,34 @@ app.post("/api/championships/:id/verdicts", requireAdmin, async (req, res) => {
     if (err.code === "DRIVER_AMBIGUOUS") {
       return res.status(409).json({ error: "driver_ambiguous" });
     }
+    if (err.code === "CHAMPIONSHIP_ENDED") {
+      return res.status(409).json({ error: "championship_ended" });
+    }
+    console.error(err);
+    res.status(500).json({ error: "write_failed" });
+  }
+});
+
+app.delete("/api/championships/:id/verdicts/:verdictId", requireAdmin, async (req, res) => {
+  try {
+    await removeVerdict(req.params.id, req.params.verdictId);
+    res.status(204).end();
+  } catch (err) {
+    if (err.code === "NO_CHAMPIONSHIP") {
+      return res.status(404).json({ error: "championship_not_found" });
+    }
+    if (err.code === "VERDICT_NOT_FOUND") {
+      return res.status(404).json({ error: "verdict_not_found" });
+    }
+    if (err.code === "CHAMPIONSHIP_ENDED") {
+      return res.status(409).json({ error: "championship_ended" });
+    }
+    if (err.code === "DRIVER_NOT_FOUND") {
+      return res.status(409).json({ error: "points_driver_missing" });
+    }
+    if (err.code === "DRIVER_AMBIGUOUS") {
+      return res.status(409).json({ error: "points_driver_ambiguous" });
+    }
     console.error(err);
     res.status(500).json({ error: "write_failed" });
   }
@@ -498,7 +633,6 @@ app.post("/api/championships/:id/drivers", requireAdmin, async (req, res) => {
   const name = str(b.name);
   const number = Number(b.number);
   const points = blank(b.points) ? 0 : Number(b.points);
-  const status = str(b.status);
 
   if (!name || name.length > 60) {
     return res.status(400).json({ error: "invalid_name" });
@@ -514,7 +648,7 @@ app.post("/api/championships/:id/drivers", requireAdmin, async (req, res) => {
   }
 
   try {
-    res.status(201).json(await addDriver(req.params.id, { name, number, points, status }));
+    res.status(201).json(await addDriver(req.params.id, { name, number, points}));
   } catch (err) {
     if (err.code === "NO_CHAMPIONSHIP") {
       return res.status(404).json({ error: "championship_not_found" });
@@ -524,6 +658,9 @@ app.post("/api/championships/:id/drivers", requireAdmin, async (req, res) => {
     }
     if (err.code === "DUPLICATE_NUMBER") {
       return res.status(409).json({ error: "duplicate_number" });
+    }
+    if (err.code === "CHAMPIONSHIP_ENDED") {
+      return res.status(409).json({ error: "championship_ended" });
     }
     console.error(err);
     res.status(500).json({ error: "write_failed" });
@@ -539,3 +676,4 @@ if (fs.existsSync(dist)) {
 }
 
 app.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`));
+startBot({ dataDir: DATA_DIR });

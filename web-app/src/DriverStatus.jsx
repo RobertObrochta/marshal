@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useApi from "./useApi.js";
 import Select from "./Select.jsx";
-
+ 
 const ERRORS = {
   invalid_name: "Enter the driver's name (up to 60 characters).",
   reserved_name: "\"Steward\" is reserved and can't be used as a driver name.",
@@ -9,12 +9,13 @@ const ERRORS = {
   invalid_points: "Points must be a whole number from -9999 to 9999.",
   duplicate_name: "A driver with that name is already in this championship.",
   duplicate_number: "That car number is already taken in this championship.",
+  championship_ended: "This championship has been ended. Reopen it from History to make changes.",
   championship_not_found: "That championship no longer exists.",
   not_authenticated: "Your session expired. Reload and log in again.",
   not_authorized: "Your session expired. Reload and log in again.",
 };
  
-const EMPTY = { name: "", number: "", points: ""};
+const EMPTY = { name: "", number: "", points: "" };
  
 export default function DriverStatus({ championship }) {
   const [reloadKey, setReloadKey] = useState(0);

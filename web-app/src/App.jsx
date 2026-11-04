@@ -3,6 +3,7 @@ import ChampionshipsMenu from "./ChampionshipsMenu.jsx";
 import Verdicts from "./Verdicts.jsx";
 import DriverStatus from "./DriverStatus.jsx";
 import NewChampionship from "./NewChampionship.jsx";
+import History from "./History.jsx";
 
 const ERRORS = {
   access_denied: "You cancelled the Discord login.",
@@ -70,10 +71,20 @@ export default function App() {
   
  return (
   <main className="screen">
-    <ChampionshipsMenu onSelect={setView} reloadKey={championshipsKey} />
-      {view?.page === "New Championship" && (
-        <NewChampionship onCreated={() => setChampionshipsKey((k) => k + 1)} />
-      )}
+    <ChampionshipsMenu
+      onSelect={setView}
+      reloadKey={championshipsKey}
+      onEnded={(c) => {
+        if (view?.championship?.id === c.id) setView(null);
+        setChampionshipsKey((k) => k + 1);
+      }}
+    />
+    {view?.page === "History" && (
+      <History onChanged={() => setChampionshipsKey((k) => k + 1)} />
+    )}
+    {view?.page === "New Championship" && (
+            <NewChampionship onCreated={() => setChampionshipsKey((k) => k + 1)} />
+          )}
     {view?.page === "Verdicts" && <Verdicts championship={view.championship} />}
     {view?.page === "Driver Status" && <DriverStatus championship={view.championship} />}
     {!view && <h1 className="hello">Hello World</h1>}

@@ -1,23 +1,2 @@
 [
-  {
-    "id": "d-001",
-    "championshipId": 1,
-    "name": "Driver One",
-    "number": 12,
-    "points": 0
-  },
-  {
-    "id": "d-002",
-    "championshipId": 1,
-    "name": "Driver Two",
-    "number": 34,
-    "points": 121
-  },
-  {
-    "id": "d-003",
-    "championshipId": 1,
-    "name": "rob orbcohta",
-    "number": 31,
-    "points": 1
-  }
 ]
